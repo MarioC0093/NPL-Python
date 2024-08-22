@@ -1,0 +1,128 @@
+[
+  {
+    "objectID": "borrar_test.html",
+    "href": "borrar_test.html",
+    "title": "NPL with Python",
+    "section": "",
+    "text": "# Import text from url\nimport requests\nimport re\n# Tokenizacion\nimport nltk\nfrom nltk.tokenize import word_tokenize\n# Stop Words\nfrom nltk.corpus import stopwords\n# Steamming and Lemmatization\nimport nltk\nfrom nltk.stem.snowball import SnowballStemmer"
+  },
+  {
+    "objectID": "borrar_test.html#librerías",
+    "href": "borrar_test.html#librerías",
+    "title": "NPL with Python",
+    "section": "",
+    "text": "# Import text from url\nimport requests\nimport re\n# Tokenizacion\nimport nltk\nfrom nltk.tokenize import word_tokenize\n# Stop Words\nfrom nltk.corpus import stopwords\n# Steamming and Lemmatization\nimport nltk\nfrom nltk.stem.snowball import SnowballStemmer"
+  },
+  {
+    "objectID": "borrar_test.html#tokenization",
+    "href": "borrar_test.html#tokenization",
+    "title": "NPL with Python",
+    "section": "Tokenization",
+    "text": "Tokenization\n\n\nCódigo\ntokens = word_tokenize(text)\nprint(tokens[:10])\n\n\n['Capítulo', 'primero', '.', 'Que', 'trata', 'de', 'la', 'condición', 'y', 'ejercicio']"
+  },
+  {
+    "objectID": "borrar_test.html#stop-words",
+    "href": "borrar_test.html#stop-words",
+    "title": "NPL with Python",
+    "section": "Stop Words",
+    "text": "Stop Words\n\n\nCódigo\nstop_words = set(stopwords.words('spanish'))\ntokens = [w for w in tokens if w.lower() not in stop_words]\nprint(tokens[:10])\n\n\n['Capítulo', 'primero', '.', 'trata', 'condición', 'ejercicio', 'famoso', 'hidalgo', 'don', 'Quijote']"
+  },
+  {
+    "objectID": "borrar_test.html#stemming-and-lemmatization",
+    "href": "borrar_test.html#stemming-and-lemmatization",
+    "title": "NPL with Python",
+    "section": "Stemming and Lemmatization",
+    "text": "Stemming and Lemmatization\nhttps://spacy.io/models/es\nhttps://github.com/explosion/spacy-models/releases?q=es_core_web_md&expanded=true\n\n\nCódigo\n# %pip install -U spacy\n\n\n\n\nCódigo\nstemmer = SnowballStemmer(\"spanish\")\n\ntokens = [stemmer.stem(palabra) for palabra in tokens]\n\ntokens[:10]\n\n\n['capitul',\n 'primer',\n '.',\n 'trat',\n 'condicion',\n 'ejercici',\n 'famos',\n 'hidalg',\n 'don',\n 'quijot']\n\n\n\n\nCódigo\n# %python -m spacy download es_core_news_md"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "NPL with Python",
+    "section": "",
+    "text": "Librerías\n# Import text from url\nimport requests\nimport re\n# Colores\nfrom termcolor import colored # Solo funciona dentro del notebook\nfrom rich.console import Console # Este paquete logra reflejarlo en el HTML\nconsole = Console(record=True)\n# NPL en general\nimport spacy\n# Tokenizacion\nimport nltk\nfrom nltk.tokenize import word_tokenize\n# Stop Words\nfrom nltk.corpus import stopwords\n# Steamming and Lemmatization\nimport nltk\nfrom nltk.stem.snowball import SnowballStemmer\nCódigo\n%run  \"src\\counter_to_html.py\""
+  },
+  {
+    "objectID": "index.html#librerías",
+    "href": "index.html#librerías",
+    "title": "NPL with Python",
+    "section": "",
+    "text": "# Import text from url\nimport requests\nimport re\n# Tokenizacion\nimport nltk\nfrom nltk.tokenize import word_tokenize\n# Stop Words\nfrom nltk.corpus import stopwords\n# Steamming and Lemmatization\nimport nltk\nfrom nltk.stem.snowball import SnowballStemmer"
+  },
+  {
+    "objectID": "index.html#tokenization",
+    "href": "index.html#tokenization",
+    "title": "NPL with Python",
+    "section": "2.1 Tokenization",
+    "text": "2.1 Tokenization\n\n\nCódigo\ntokens = word_tokenize(text)\nprint(tokens[:10])\n\n\n['Capítulo', 'primero', '.', 'Que', 'trata', 'de', 'la', 'condición', 'y', 'ejercicio']"
+  },
+  {
+    "objectID": "index.html#stop-words",
+    "href": "index.html#stop-words",
+    "title": "NPL with Python",
+    "section": "2.2 Stop Words",
+    "text": "2.2 Stop Words\n\n\nCódigo\nstop_words = set(stopwords.words('spanish'))\ntokens = [w for w in tokens if w.lower() not in stop_words]\nprint(tokens[:10])\n\n\n['Capítulo', 'primero', '.', 'trata', 'condición', 'ejercicio', 'famoso', 'hidalgo', 'don', 'Quijote']"
+  },
+  {
+    "objectID": "index.html#stemming-and-lemmatization",
+    "href": "index.html#stemming-and-lemmatization",
+    "title": "NPL with Python",
+    "section": "2.3 Stemming and Lemmatization",
+    "text": "2.3 Stemming and Lemmatization\nhttps://spacy.io/models/es\nhttps://github.com/explosion/spacy-models/releases?q=es_core_web_md&expanded=true\n\n\nCódigo\nstemmer = SnowballStemmer(\"spanish\")\ntokens = [stemmer.stem(palabra) for palabra in tokens]\ntokens[:10]\n\n\n['capitul',\n 'primer',\n '.',\n 'trat',\n 'condicion',\n 'ejercici',\n 'famos',\n 'hidalg',\n 'don',\n 'quijot']"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site"
+  },
+  {
+    "objectID": "index.html#ingesta-del-documento",
+    "href": "index.html#ingesta-del-documento",
+    "title": "NPL with Python",
+    "section": "1.1 Ingesta del documento",
+    "text": "1.1 Ingesta del documento\nLeemos el libro El Quijote.\n\n\nCódigo\n# Enviar una solicitud GET a la URL\nresponse = requests.get(\"https://www.gutenberg.org/cache/epub/2000/pg2000.txt\")\n\n# Verificar si la solicitud fue exitosa\nif response.status_code == 200:\n    quijote = response.text\n    # print(\"Éxito al leer el texto.\")\nelse:\n    print(\"Error al leer el texto.\")\n\n\nNos ocupamos únicamente de los primeros seis capítulos de la primera parte de El Quijote.\n\n\nCódigo\n### Inicio del primer capítulo\n\n# Palabra objetivo\npalabra_start = \"Primera parte del ingenioso hidalgo don Quijote de la Mancha\"\n\n# Expresión regular para capturar todo lo que va antes de un patrón de  búsqueda\npatron = re.compile(rf\"{palabra_start}\\s*(.*)\", re.DOTALL)\n\ncoincidencia = patron.search(quijote)\n\nif coincidencia:\n    quijote = coincidencia.group(1) # 0 incluye la palabra del search, 1 no lo incluye\n    console.print(\"[bold]Inicio del primer capítulo:\\n\\n[/bold]\", quijote[:251])\n    # print(\"Inicio del texto:\\n\\n\", quijote[:251])\nelse:\n    console.print(\"[bold]Inicio del texto:\\n\\n[/bold]\", quijote[:251])\n    \n\n### Inicio del sépimo capítulo (y final del sexto)\npalabra_end = \"Capítulo VII\"\n\n# patron = re.compile(rf\"(.*)\\b{re.escape(palabra_end)}\\b\", re.DOTALL) # .* es codicioso (\"greedy\"): captura la mayor cantidad posible de caracteres antes de la coincidir con la palabra, captura hasta la última aparición de la palabra buscada\npatron = re.compile(rf\"(.*?)\\b{re.escape(palabra_end)}\\b\", re.DOTALL) # .* es no codicioso (\"lazy\"): captura la menor cantidad posible de caracteres y evitar que el resto del texto cooincida, se detiene en la primera coincidencia\n\ncoincidencia = patron.search(quijote)\n\nif coincidencia:\n    quijote = coincidencia.group(0)\n    console.print(\"[bold]Final del sexto capítulo:\\n\\n[/bold]\", quijote[-231:])\n    quijote = coincidencia.group(1) # Elimino el patrón de búsqueda\nelse:\n    console.print(\"[bold]Final del texto:\\n\\n[/bold]\", quijote[-231:])\n\n\nInicio del primer capítulo:\n\n Capítulo primero. Que trata de la condición y ejercicio del famoso hidalgo\ndon Quijote de la Mancha\n\nEn un lugar de la Mancha, de cuyo nombre no quiero acordarme, no ha mucho\ntiempo que vivía un hidalgo de los de lanza en astillero, adarga antigua\n\n\n\nFinal del sexto capítulo:\n\n o el cura en oyendo el nombre— si tal libro hubiera\nmandado quemar; porque su autor fue uno de los famosos poetas del mundo, no\nsólo de España, y fue felicísimo en la tradución de algunas fábulas de\nOvidio.\n\n\n\n\nCapítulo VII"
+  },
+  {
+    "objectID": "index.html#carga-del-modelo",
+    "href": "index.html#carga-del-modelo",
+    "title": "NPL with Python",
+    "section": "1.2 Carga del modelo",
+    "text": "1.2 Carga del modelo\nDescarga y carga del modelo de lenguaje a través de la librería spaCy\n\n\nCódigo\n# !python -m spacy download es_core_news_md\n\n\n\n\nCódigo\nimport spacy\nnlp = spacy.load(\"es_core_news_md\")"
+  },
+  {
+    "objectID": "index.html#visualización-de-la-información-fragmentada",
+    "href": "index.html#visualización-de-la-información-fragmentada",
+    "title": "NPL with Python",
+    "section": "1.3 Visualización de la información fragmentada",
+    "text": "1.3 Visualización de la información fragmentada\nPodemos dividir el texto en párrafos.\n\n\nCódigo\nfor parrafo in list(nlp(quijote).sents)[:3]: # No es necesario pasarlo a una lista, solo para coger un número de ejemplos\n    console.print(\"[blue]\\nSiguiente párrafo:\\n\\n[/blue]\", parrafo)\n    #print(parrafo)\n\n\nSiguiente párrafo:\n\n Capítulo primero.\n\n\n\nSiguiente párrafo:\n\n Que trata de la condición y ejercicio del famoso hidalgo\ndon Quijote de la Mancha\n\nEn un lugar de la Mancha, de cuyo nombre no quiero acordarme, no ha mucho\ntiempo que vivía un hidalgo de los de lanza en astillero, adarga antigua,\nrocín flaco y galgo corredor.\n\n\n\nSiguiente párrafo:\n\n Una olla de algo más vaca que carnero,\nsalpicón las más noches, duelos y quebrantos los sábados, lantejas los\nviernes, algún palomino de añadidura los domingos, consumían las tres\npartes de su hacienda.\n\n\n\nY los párrafos en palabras.\n\n\nCódigo\nfor parrafo in list(nlp(quijote).sents)[:1]:\n    console.print(\"[blue]\\nSiguiente párrafo:\\n[/blue]\")\n    # print(colored(\"\\nSiguiente párrafo:\\n\",'blue'))\n    for palabra in parrafo:\n        print(palabra)\n\n\nSiguiente párrafo:\n\n\n\n\nCapítulo\nprimero\n."
+  },
+  {
+    "objectID": "index.html#fragmentación-de-la-información",
+    "href": "index.html#fragmentación-de-la-información",
+    "title": "NPL with Python",
+    "section": "1.3 Fragmentación de la información",
+    "text": "1.3 Fragmentación de la información\nPodemos dividir el texto en párrafos.\n\n\nCódigo\nfor parrafo in list(nlp(quijote).sents)[:3]: # No es necesario pasarlo a una lista, solo para coger un número de ejemplos\n    console.print(\"[blue]\\nSiguiente párrafo:\\n\\n[/blue]\", parrafo)\n    #print(parrafo)\n\n\n\n\nSiguiente párrafo:\n\n Capítulo primero.\n\n\n\nSiguiente párrafo:\n\n Que trata de la condición y ejercicio del famoso hidalgo\ndon Quijote de la Mancha\n\nEn un lugar de la Mancha, de cuyo nombre no quiero acordarme, no ha mucho\ntiempo que vivía un hidalgo de los de lanza en astillero, adarga antigua,\nrocín flaco y galgo corredor.\n\n\n\nSiguiente párrafo:\n\n Una olla de algo más vaca que carnero,\nsalpicón las más noches, duelos y quebrantos los sábados, lantejas los\nviernes, algún palomino de añadidura los domingos, consumían las tres\npartes de su hacienda.\n\n\n\n\n\nY los párrafos en palabras.\n\n\nCódigo\nfor parrafo in list(nlp(quijote).sents)[:1]:\n    console.print(\"[blue]\\nSiguiente párrafo:\\n[/blue]\")\n    # print(colored(\"\\nSiguiente párrafo:\\n\",'blue'))\n    for palabra in parrafo:\n        print(palabra)\n\n\nSiguiente párrafo:\n\n\n\n\nCapítulo\nprimero\n."
+  },
+  {
+    "objectID": "test.html",
+    "href": "test.html",
+    "title": "Pipeline NPL",
+    "section": "",
+    "text": "# Import text from url\nimport requests\nimport re\n# Colores\nfrom termcolor import colored # Solo funciona dentro del notebook\nfrom rich.console import Console # Este paquete logra reflejarlo en el HTML\nconsole = Console(record=True)\n# NPL en general\nimport spacy\n# Tokenizacion\nimport nltk\nfrom nltk.tokenize import word_tokenize\n# Stop Words\nfrom nltk.corpus import stopwords\n# Steamming and Lemmatization\nimport nltk\nfrom nltk.stem.snowball import SnowballStemmer\n\n\n\nCode\n# Enviar una solicitud GET a la URL\nresponse = requests.get(\"https://www.gutenberg.org/cache/epub/2000/pg2000.txt\")\n\n# Verificar si la solicitud fue exitosa\nif response.status_code == 200:\n    quijote = response.text\n    # print(\"Éxito al leer el texto.\")\nelse:\n    print(\"Error al leer el texto.\")\n\n\n\n\nCode\n### Inicio del primer capítulo\n\n# Palabra objetivo\npalabra_start = \"Primera parte del ingenioso hidalgo don Quijote de la Mancha\"\n\n# Expresión regular para capturar todo lo que va antes de un patrón de  búsqueda\npatron = re.compile(rf\"{palabra_start}\\s*(.*)\", re.DOTALL)\n\ncoincidencia = patron.search(quijote)\n\nif coincidencia:\n    quijote = coincidencia.group(1) # 0 incluye la palabra del search, 1 no lo incluye\n    console.print(\"[bold]Inicio del primer capítulo:\\n\\n[/bold]\", quijote[:251])\n    # print(\"Inicio del texto:\\n\\n\", quijote[:251])\nelse:\n    console.print(\"[bold]Inicio del texto:\\n\\n[/bold]\", quijote[:251])\n    \n\n### Inicio del sépimo capítulo (y final del sexto)\npalabra_end = \"Capítulo VII\"\n\n# patron = re.compile(rf\"(.*)\\b{re.escape(palabra_end)}\\b\", re.DOTALL) # .* es codicioso (\"greedy\"): captura la mayor cantidad posible de caracteres antes de la coincidir con la palabra, captura hasta la última aparición de la palabra buscada\npatron = re.compile(rf\"(.*?)\\b{re.escape(palabra_end)}\\b\", re.DOTALL) # .* es no codicioso (\"lazy\"): captura la menor cantidad posible de caracteres y evitar que el resto del texto cooincida, se detiene en la primera coincidencia\n\ncoincidencia = patron.search(quijote)\n\nif coincidencia:\n    quijote = coincidencia.group(0)\n    console.print(\"[bold]Final del sexto capítulo:\\n\\n[/bold]\", quijote[-231:])\n    quijote = coincidencia.group(1) # Elimino el patrón de búsqueda\nelse:\n    console.print(\"[bold]Final del texto:\\n\\n[/bold]\", quijote[-231:])\n\n\n\n\nCode\nimport spacy\nnlp = spacy.load(\"es_core_news_md\")\n\n\n\n\nCode\nfor parrafo in list(nlp(quijote).sents)[:3]: # No es necesario pasarlo a una lista, solo para coger un número de ejemplos\n    console.print(\"[blue]\\nSiguiente párrafo:\\n\\n[/blue]\", parrafo)\n    #print(parrafo)"
+  },
+  {
+    "objectID": "index.html#pos-tagging",
+    "href": "index.html#pos-tagging",
+    "title": "NPL with Python",
+    "section": "2.4 POS Tagging",
+    "text": "2.4 POS Tagging\nPart of speech.\nLa librería spacy ofrece variedad de etiquetas para un token. Podemos encontrarlas aquí: https://spacy.io/api/token#attributes. Por ejemplo:\n\npropiedades = ['text', 'lang_', 'is_digit', 'is_lower', 'is_upper', 'is_sent_start', 'is_sent_end',\n               'like_email', 'like_url', # Espero no encontrar ninguna de estas etiquetas en El Quijote\n               'sentiment', 'sent']\n\n\n\nCódigo\nejemplo_01 = nlp(text)[0]\n\nfor attr in propiedades:\n    print(\"obj.%s = %r\" % (attr, getattr(ejemplo_01, attr)))\n\n\nobj.text = 'Capítulo'\nobj.lang_ = 'es'\nobj.is_digit = False\nobj.is_lower = False\nobj.is_upper = False\nobj.is_sent_start = True\nobj.is_sent_end = False\nobj.like_email = False\nobj.like_url = False\nobj.sentiment = 0.0\nobj.sent = Capítulo primero.\n\n\n\n\nCódigo\na=nlp(text).ents[0]\n\n\n\n\nCódigo\nfor attr in dir(a):\n    if attr != 'doc' and attr != 'sent' and attr == 'label_':\n        print(\"obj.%s = %r\" % (attr, getattr(a, attr)))\n\n\nobj.label_ = 'MISC'\n\n\n\n\nCódigo\n#for named_entity in nlp(text).ents:\n#    print(named_entity, named_entity.label_)\n\n\n\n\nCódigo\n#import spacy\n\n#nlp = spacy.load(\"es_core_news_md\")\ndoc = nlp(text)[:10]\nfor token in doc:\n    print(token.text, token.pos_, token.tag_ )\n\n\nCapítulo PROPN PROPN\nprimero ADJ ADJ\n. PUNCT PUNCT\nQue SCONJ SCONJ\ntrata VERB VERB\nde ADP ADP\nla DET DET\ncondición NOUN NOUN\ny CCONJ CCONJ\nejercicio NOUN NOUN"
+  },
+  {
+    "objectID": "index.html#ner",
+    "href": "index.html#ner",
+    "title": "NPL with Python",
+    "section": "2.5 NER",
+    "text": "2.5 NER\nNamed-Entity Recognition.\nRealizamos esta subtarea de NPL mediante la librería spaCy.\n\ndocumento = nlp(text)\n\nTodas las entidades nombradas se encuentran en la propiedad document.ents.\n\n\nCódigo\nfor named_entity in list(documento.ents)[:10]:\n    print(named_entity, named_entity.label_)\n\n\nQue trata de la condición MISC\nhidalgo PER\nla Mancha LOC\nUna olla de algo más vaca MISC\nEl resto della MISC\nTenía en su casa una MISC\nFrisaba LOC\nQuieren PER\nQuijada PER\nQuesada LOC\n\n\n\n\nCódigo\nimport pandas as pd\nfrom collections import Counter\npeople = []\n\nfor named_entity in documento.ents:\n    if named_entity.label_ == \"PER\":\n        people.append(named_entity.text)\n\npeople_tally = Counter(people)\n\ndf = pd.DataFrame(people_tally.most_common(), columns=['character', 'count'])\nprint(df)\n\n\n               character  count\n0                 Andrés      7\n1                Nicolás      5\n2        Amadís de Gaula      4\n3                 Amadís      4\n4              Rocinante      4\n..                   ...    ...\n133    Alonso de Ercilla      1\n134            Juan Rufo      1\n135  Cristóbal de Virués      1\n136           Lloráralas      1\n137               Ovidio      1\n\n[138 rows x 2 columns]\n\n\n\n\nCódigo\n# Convertir el Counter a una tabla HTML\nhtml_table = counter_to_html_table(people_tally)\n\n# Mostrar la tabla HTML\ndisplay(HTML(html_table))\n\n\n\n\n    \n    \n    \n    \n    \n\n\n\nElemento\nConteo\n\n\n\n\nhidalgo\n2\n\n\nQuieren\n1\n\n\nQuijada\n1\n\n\nFeliciano de Silva\n1\n\n\nAristóteles\n1\n\n\nBelianís\n1\n\n\nrecebía\n2\n\n\nPalmerín de Ingalaterra\n1\n\n\nAmadís de Gaula\n4\n\n\nNicolás\n5\n\n\nGalaor\n1\n\n\nLlenósele\n1\n\n\nDecía\n3\n\n\nel Cid Ruy Díaz\n1\n\n\nel Caballero\n1\n\n\nArdiente Espada\n1\n\n\nBernardo del Carpio\n2\n\n\nRoldán\n1\n\n\nHércules\n1\n\n\nAnteo\n1\n\n\nMorgante\n1\n\n\nReinaldos\n1\n\n\nallende\n1\n\n\nMahoma\n2\n\n\nDiera\n1\n\n\nAmadís\n4\n\n\nHepila\n1\n\n\nLimpias\n1\n\n\nDulcinea\n2\n\n\nToboso\n1\n\n\nCapítulo II\n1\n\n\nRocinante\n4\n\n\nApolo\n4\n\n\nmías\n3\n\n\nhabedes\n1\n\n\nDiose\n1\n\n\ndella\n1\n\n\nMirábanle\n1\n\n\nmucha sandez\n1\n\n\nseñor caballero\n2\n\n\nPreguntáronle\n1\n\n\nCapítulo III\n1\n\n\nAntojósele\n1\n\n\nAcorredme\n1\n\n\nSancho Bienaya\n1\n\n\nDon\n1\n\n\ndoña Tolosa\n1\n\n\nMolinera\n1\n\n\nCapítulo IV\n1\n\n\nGracias\n1\n\n\nDios\n1\n\n\nDescortés caballero\n1\n\n\nSeñor caballero\n3\n\n\nruin villano?\n1\n\n\nPagadle\n1\n\n\nÉl\n1\n\n\nAndrés\n7\n\n\nSan Bartolomé\n1\n\n\nMire\n2\n\n\nJuan\n1\n\n\nHaldudo\n1\n\n\nVenid\n1\n\n\nRoque\n1\n\n\nLlamad\n1\n\n\ncontalle\n1\n\n\nDulcinea del Toboso\n2\n\n\nCayó Rocinante\n1\n\n\nDábanle\n1\n\n\nCansóse\n1\n\n\nCapítulo V.\n1\n\n\nValdovinos\n4\n\n\nCarloto\n1\n\n\nEmperante\n1\n\n\nSeñor Quijana\n1\n\n\nAbindarráez\n2\n\n\nRodrigo de Narváez\n4\n\n\nAbencerraje\n1\n\n\nJorge\n1\n\n\nRodrigo\n1\n\n\nNarváez\n1\n\n\nPedro Alonso\n1\n\n\nhidalgo del señor\n1\n\n\nQuijana.\n1\n\n\nPero Pérez\n1\n\n\nSatanás\n1\n\n\nBarrabás\n1\n\n\nvuestras mercedes\n1\n\n\nmoro Abindarráez\n1\n\n\nTénganse\n1\n\n\nCapítulo VI\n1\n\n\nEsplandián\n2\n\n\nTomad\n1\n\n\nHízolo\n1\n\n\nAmadís de Grecia\n1\n\n\nPintiquiniestra\n1\n\n\nDarinel\n1\n\n\nme engendró\n1\n\n\nDon Olivante de Laura\n1\n\n\nFlorimorte de Hircania\n1\n\n\nFlorimorte\n1\n\n\nAbrióse\n1\n\n\nMontalbán\n2\n\n\nTurpín\n1\n\n\nMateo Boyardo\n1\n\n\nLudovico Ariosto\n1\n\n\nPalmerín de Oliva\n1\n\n\nPalmerín\n1\n\n\nIngalaterra\n2\n\n\nAlejandro\n1\n\n\nDario\n1\n\n\nHomero\n1\n\n\nDon Belianís\n1\n\n\nTirante el Blanco\n1\n\n\nTirante\n2\n\n\nAquí\n1\n\n\nTomás de Montalbán\n1\n\n\nFonseca\n1\n\n\nPlacerdemivida\n1\n\n\nReposada\n1\n\n\nEmperatriz\n1\n\n\nHipólito\n1\n\n\nLa Diana\n3\n\n\nJorge de Montemayor\n1\n\n\nFelicia\n1\n\n\nSalmantino\n2\n\n\nGil Polo\n2\n\n\nFortuna\n1\n\n\nAntonio de Lofraso\n1\n\n\nrecebí\n1\n\n\nDesengaños\n1\n\n\nEl Cancionero de López Maldonado\n1\n\n\nMiguel de Cervantes\n1\n\n\nCervantes\n1\n\n\nAlonso de Ercilla\n1\n\n\nJuan Rufo\n1\n\n\nCristóbal de Virués\n1\n\n\nLloráralas\n1\n\n\nOvidio\n1\n\n\n\n\n\n    \n    Mostrar más...\n    \n    \n    \n\n\nEtiquetas NER Las entidades nombradas son frases que contienen los nombres de personas, organizaciones, ubicaciones, expresiones de tiempo, cantidades, entre otras. Las entidades de interés se almacenan con su etiqueta correspondiente (por ejemplo, ‘PER‘ para personas, ‘LOC‘ para lugares, ‘ORG’ para organizaciones y ‘MISC’ que se emplea como un comodín para las tres anteriores) y sus posiciones en el texto (cable aclarar que el modelo que se utiliza mediante spaCy ya tiene las etiquetas predefinidas).\n\ngetattr(nlp.get_pipe('ner'), 'labels')\n\n('LOC', 'MISC', 'ORG', 'PER')\n\n\n\n\nCódigo\nfrom IPython.display import Markdown, display\nimport re\n\ndef get_ner_in_context(keyword, document, desired_ner_labels= False):\n    \n    if desired_ner_labels != False:\n        desired_ner_labels = desired_ner_labels\n    else:\n         # all possible labels\n        desired_ner_labels = list(nlp.get_pipe('ner').labels)  \n        \n    #Iterate through all the sentences in the document and pull out the text of each sentence\n    for sentence in document.sents:\n        #process each sentence\n        sentence_doc = nlp(sentence.text)\n        for named_entity in sentence_doc.ents:\n            #Check to see if the keyword is in the sentence (and ignore capitalization by making both lowercase)\n            if keyword.lower() in named_entity.text.lower()  and named_entity.label_ in desired_ner_labels:\n                #Use the regex library to replace linebreaks and to make the keyword bolded, again ignoring capitalization\n            \n                sentence_text = re.sub('\\n', ' ', sentence.text)\n                sentence_text = re.sub(f\"{named_entity.text}\", f\"**{named_entity.text}**\", sentence_text, flags=re.IGNORECASE)\n\n                display(Markdown('--')) # Si pones --- te sale una línea de izq a drcha\n                display(Markdown(f\"**{named_entity.label_}**\"))\n                display(Markdown(sentence_text))\n\n\n\n\nCódigo\ntype(doc)\n\n\nspacy.tokens.span.Span\n\n\n\n\nCódigo\nget_ner_in_context('Sancho', nlp(text), desired_ner_labels = False)\n\n\n–\n\n\nPER\n\n\nElla respondió con mucha humildad que se llamaba la Tolosa, y que era hija de un remendón natural de Toledo que vivía a las tendillas de Sancho Bienaya, y que dondequiera que ella estuviese le serviría y le tendría por señor.\n\n\n\n\nCódigo\nimport spacy\nnlp = spacy.load(\"es_core_news_md\")\ndoc = nlp(\"Apple está pensando en comprar una startup de España por 5.000 €.\")\nfor ent in doc.ents:\n    print(ent.text, ent.label_)\n\n\nApple ORG\nEspaña ORG\n\n\n\n\nCódigo\ndoc\n\n\nApple está pensando en comprar una startup de España por 5.000 €.\n\n\n\n\nCódigo\nget_ner_in_context\n\n\n&lt;function __main__.get_ner_in_context(keyword, document, desired_ner_labels=False)&gt;"
+  }
+]
