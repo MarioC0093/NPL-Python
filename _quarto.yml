@@ -1,0 +1,31 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "Pipeline NPL"
+  favicon: attachments/favicon.png
+  twitter-card: true
+
+abstract: |
+  La aplicación de nuevas fuentes de Inteligencia Artificial en el lenguaje humano está en auge desde la aparición de las IA Generativas de texto.
+  Es por ello que se necesita tener un pipeline con los primeros pasos de NPL que debemos mantener en la resolución de problemas de mayor complejida.
+
+keywords: ["npl","quijote"]
+
+format:
+  html:
+    code-link: TRUE
+    css: styles.css
+    toc: true
+    toc-title: "Índice"
+    toc-location: left
+    toc-expand: TRUE
+    number-sections: TRUE
+    theme: style.css
+    page-layout: full
+
+editor: visual
+page-layout: full
+code-fold: true
+warning: false

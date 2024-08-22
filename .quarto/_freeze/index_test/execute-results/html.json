@@ -1,0 +1,11 @@
+{
+  "hash": "c46334d790a0247d45ef8f07577032c8",
+  "result": {
+    "markdown": "---\ntitle: \"NPL-Python\"\nauthor: \"Mario Camacho\"\ndate-modified: last-modified\ndate-format: \"DD MMMM YYYY\"\nlang: es\nengine: knitr\njupyter: python3\n\nexecute:\n    enabled: true\n---\n\nThis is a Quarto website.\n\nTo learn more about Quarto websites visit <https://quarto.org/docs/websites>.\n\n# Instalación de librerías necesarias\n\n\n```{python}\nprint(\"hola\")\n```\n\n\n::: {.cell execution_count=2}\n``` {.python .cell-code}\n# Instalación de librerías necesarias\n!python -m spacy download en_core_web_sm\n%pip install nltk spacy textblob\n\n# Importar librerías\nimport nltk\nimport spacy\nfrom textblob import TextBlob\nfrom nltk.tokenize import word_tokenize\nfrom nltk.corpus import stopwords\n\n# Descargar recursos necesarios\nnltk.download('punkt')\nnltk.download('stopwords')\nimport spacy\nfrom spacy.lang.en.examples import sentences\nnlp = spacy.load(\"en_core_web_sm\")\n\n# Texto de ejemplo\ntexto = \"Apple is looking at buying U.K. startup for $1 billion. The company is highly praised by analysts.\"\n\n# Preprocesamiento con NLTK: Tokenización y eliminación de stopwords\nnltk.download('punkt_tab')\ntokens = word_tokenize(texto)\nstop_words = set(stopwords.words('english'))\nfiltered_tokens = [word for word in tokens if word.lower() not in stop_words]\nprint(\"Tokens filtrados:\", filtered_tokens)\n\n# Análisis de entidades nombradas con spaCy\ndoc = nlp(texto)\nfor ent in doc.ents:\n    print(ent.text, ent.label_)\n\n# Análisis de sentimientos con TextBlob\nblob = TextBlob(texto)\nsentimiento = blob.sentiment\n```\n:::\n\n\n::: {.cell execution_count=3}\n``` {.python .cell-code}\nprint(\"Análisis de sentimiento:\", sentimiento)\n```\n\n::: {.cell-output .cell-output-stdout}\n```\nAnálisis de sentimiento: Sentiment(polarity=0.16, subjectivity=0.54)\n```\n:::\n:::\n\n\n",
+    "supporting": [
+      "index_test_files"
+    ],
+    "filters": [],
+    "includes": {}
+  }
+}
