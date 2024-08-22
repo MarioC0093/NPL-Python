@@ -5,7 +5,29 @@ project:
 website:
   title: "Pipeline NPL"
   favicon: attachments/favicon.png
+  sidebar:
+    tools:
+      - href: 'https://github.com/MarioC0093'
+        icon: github
+        text: My repositories
   twitter-card: true
+  navbar:
+    left:
+      - href: index.ipynb
+        text: Home
+      - href: about.html
+        text: About
+      - href: 'https://github.com/MarioC0093/NPL-Python/issues'
+        icon: github
+        text: Report an issue
+    right:
+      - href: 'https://buymeacoffee.com/marioc0093'
+        icon: rocket-takeoff
+        text: Buy me a coffee
+  page-footer:
+    center: 
+      - text: "License"
+        href: license.qmd
 
 abstract: |
   La aplicación de nuevas fuentes de Inteligencia Artificial en el lenguaje humano está en auge desde la aparición de las IA Generativas de texto.
