@@ -1,1 +1,1 @@
-{"entries":[],"headings":["preproceso","ingesta-del-documento","carga-del-modelo","fragmentación-de-la-información","pipeline-npl","tokenization","stop-words","stemming-and-lemmatization","pos-tagging","ner"]}
+{"headings":["preproceso","ingesta-del-documento","carga-del-modelo","fragmentación-de-la-información","pipeline-npl","tokenization","stop-words","stemming-and-lemmatization","pos-tagging","selección-de-nombres","visualizer-entity-recognizer","ner"],"entries":[]}
