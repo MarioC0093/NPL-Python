@@ -133,10 +133,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./LICENSE.html" rel="" target="">
- <span class="menu-text">License</span></a>
-  </li>  
-  <li class="nav-item">
     <a class="nav-link" href="https://github.com/MarioC0093/NPL-Python/issues" rel="" target=""><i class="bi bi-github" role="img">
 </i> 
  <span class="menu-text">Report an issue</span></a>
@@ -188,7 +184,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#stop-words" id="toc-stop-words" class="nav-link" data-scroll-target="#stop-words"><span class="header-section-number">2.2</span> Stop Words</a></li>
   <li><a href="#stemming-and-lemmatization" id="toc-stemming-and-lemmatization" class="nav-link" data-scroll-target="#stemming-and-lemmatization"><span class="header-section-number">2.3</span> Stemming and Lemmatization</a></li>
   <li><a href="#pos-tagging" id="toc-pos-tagging" class="nav-link" data-scroll-target="#pos-tagging"><span class="header-section-number">2.4</span> POS Tagging</a></li>
-  <li><a href="#ner" id="toc-ner" class="nav-link" data-scroll-target="#ner"><span class="header-section-number">2.5</span> NER</a></li>
+  <li><a href="#selección-de-nombres" id="toc-selección-de-nombres" class="nav-link" data-scroll-target="#selección-de-nombres"><span class="header-section-number">2.5</span> Selección de nombres</a>
+  <ul class="collapse">
+  <li><a href="#visualizer-entity-recognizer" id="toc-visualizer-entity-recognizer" class="nav-link" data-scroll-target="#visualizer-entity-recognizer"><span class="header-section-number">2.5.1</span> Visualizer (entity recognizer)</a></li>
+  </ul></li>
+  <li><a href="#ner" id="toc-ner" class="nav-link" data-scroll-target="#ner"><span class="header-section-number">2.6</span> NER</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -243,23 +243,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <p><strong>Librerías</strong></p>
 <div class="cell" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import text from url</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> requests</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Colores</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> termcolor <span class="im">import</span> colored <span class="co"># Solo funciona dentro del notebook</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> rich.console <span class="im">import</span> Console <span class="co"># Este paquete logra reflejarlo en el HTML</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>console <span class="op">=</span> Console(record<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co"># NPL en general</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> spacy</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Tokenizacion</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> nltk</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> nltk.tokenize <span class="im">import</span> word_tokenize</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Stop Words</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> nltk.corpus <span class="im">import</span> stopwords</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Steamming and Lemmatization</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> nltk</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> nltk.stem.snowball <span class="im">import</span> SnowballStemmer</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Import text from url</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> requests</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Colores</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> termcolor <span class="im">import</span> colored <span class="co"># Solo funciona dentro del notebook</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> rich.console <span class="im">import</span> Console <span class="co"># Este paquete logra reflejarlo en el HTML</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>console <span class="op">=</span> Console(record<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># NPL en general</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> spacy</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Tokenizacion</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> nltk</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> nltk.tokenize <span class="im">import</span> word_tokenize</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Stop Words</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> nltk.corpus <span class="im">import</span> stopwords</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Steamming and Lemmatization</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> nltk</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> nltk.stem.snowball <span class="im">import</span> SnowballStemmer</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="co"># ENT</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> spacy <span class="im">import</span> displacy</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell" data-execution_count="2">
 <details>
@@ -493,20 +496,21 @@ https://github.com/explosion/spacy-models/releases?q=es_core_web_md&amp;expanded
 <section id="pos-tagging" class="level2" data-number="2.4">
 <h2 data-number="2.4" class="anchored" data-anchor-id="pos-tagging"><span class="header-section-number">2.4</span> POS Tagging</h2>
 <p>Part of speech.</p>
-<p>La librería spacy ofrece variedad de etiquetas para un token. Podemos encontrarlas aquí: https://spacy.io/api/token#attributes. Por ejemplo:</p>
+<p>Etiqueta las palabras de un texto determinado según sus respectivos tipos de palabras, como sustantivos, adjetivos, adverbios y verbos.</p>
+<p><a href="https://spacy.io/usage" class="uri">https://spacy.io/usage</a></p>
+<p>La librería spaCy se basa en modelos de aprendizaje automático que se entrenaron con grandes cantidades de datos de texto etiquetados.</p>
+<p>Las etiquetas que spaCy utiliza se basan en el trabajo realizado por Universal Dependencies, un repositorio común que se puede utilizar para entrenar modelos como spaCy. La página de Dependencias universales tiene información sobre [los corpus disponibles para cada idioma]<a href="https://universaldependencies.org/" class="uri">https://universaldependencies.org/</a>.</p>
+<p>Las etiquetas que spaCy para un token podemos encontrarlas en <a href="https://spacy.io/api/token#attributes" class="uri">https://spacy.io/api/token#attributes</a>. Algunas de ellas son:</p>
 <div class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>propiedades <span class="op">=</span> [<span class="st">'text'</span>, <span class="st">'lang_'</span>, <span class="st">'is_digit'</span>, <span class="st">'is_lower'</span>, <span class="st">'is_upper'</span>, <span class="st">'is_sent_start'</span>, <span class="st">'is_sent_end'</span>,</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>               <span class="st">'like_email'</span>, <span class="st">'like_url'</span>, <span class="co"># Espero no encontrar ninguna de estas etiquetas en El Quijote</span></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>               <span class="st">'sentiment'</span>, <span class="st">'sent'</span>]</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-execution_count="15">
-<details>
-<summary>Código</summary>
+<div class="cell" data-collapse="true" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>ejemplo_01 <span class="op">=</span> nlp(text)[<span class="dv">0</span>]</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> attr <span class="kw">in</span> propiedades:</span>
 <span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"obj.</span><span class="sc">%s</span><span class="st"> = </span><span class="sc">%r</span><span class="st">"</span> <span class="op">%</span> (attr, <span class="bu">getattr</span>(ejemplo_01, attr)))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>obj.text = 'Capítulo'
 obj.lang_ = 'es'
@@ -524,119 +528,719 @@ obj.sent = Capítulo primero.</code></pre>
 <div class="cell" data-execution_count="16">
 <details>
 <summary>Código</summary>
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>a<span class="op">=</span>nlp(text).ents[<span class="dv">0</span>]</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>ejemplo_02 <span class="op">=</span> nlp(text)[:<span class="dv">15</span>]</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Encabezado</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'</span><span class="sc">{</span><span class="st">"text"</span><span class="sc">:&lt;15}</span><span class="ss"> </span><span class="sc">{</span><span class="st">"lemma_"</span><span class="sc">:&lt;15}</span><span class="ss"> </span><span class="sc">{</span><span class="st">"pos_"</span><span class="sc">:&lt;15}{</span><span class="st">"tag_"</span><span class="sc">:&lt;15}{</span><span class="st">"dep_"</span><span class="sc">:&lt;15}{</span><span class="st">"shape_"</span><span class="sc">:&lt;15}{</span><span class="st">"is_alpha"</span><span class="sc">:&lt;15}{</span><span class="st">"is_stop"</span><span class="sc">:&lt;15}</span><span class="ss">'</span>)</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"="</span><span class="op">*</span><span class="dv">15</span><span class="op">*</span><span class="dv">8</span>)</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Loop que imprime los datos en formato de tabla</span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> token <span class="kw">in</span> ejemplo_02:</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f'</span><span class="sc">{</span>token<span class="sc">.</span>text<span class="sc">:&lt;15}</span><span class="ss"> </span><span class="sc">{</span>token<span class="sc">.</span>lemma_<span class="sc">:&lt;15}</span><span class="ss"> </span><span class="sc">{</span>token<span class="sc">.</span>pos_<span class="sc">:&lt;15}</span><span class="ss"> </span><span class="sc">{</span>token<span class="sc">.</span>tag_<span class="sc">:&lt;15}</span><span class="ss"> </span><span class="sc">{</span>token<span class="sc">.</span>dep_<span class="sc">:&lt;15}</span><span class="ss"> </span><span class="sc">{</span>token<span class="sc">.</span>shape_<span class="sc">:&lt;15}</span><span class="ss"> </span><span class="sc">{</span>token<span class="sc">.</span>is_alpha<span class="sc">:&lt;15}</span><span class="ss"> </span><span class="sc">{</span>token<span class="sc">.</span>is_stop<span class="sc">:&lt;15}</span><span class="ss">'</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
+<div class="cell-output cell-output-stdout">
+<pre><code>text            lemma_          pos_           tag_           dep_           shape_         is_alpha       is_stop        
+========================================================================================================================
+Capítulo        Capítulo        PROPN           PROPN           ROOT            Xxxxx           1               0              
+primero         primero         ADJ             ADJ             amod            xxxx            1               1              
+.               .               PUNCT           PUNCT           punct           .               0               0              
+Que             que             SCONJ           SCONJ           mark            Xxx             1               1              
+trata           tratar          VERB            VERB            ROOT            xxxx            1               1              
+de              de              ADP             ADP             case            xx              1               1              
+la              el              DET             DET             det             xx              1               1              
+condición       condición       NOUN            NOUN            obj             xxxx            1               0              
+y               y               CCONJ           CCONJ           cc              x               1               1              
+ejercicio       ejercicio       NOUN            NOUN            conj            xxxx            1               0              
+del             del             ADP             ADP             case            xxx             1               1              
+famoso          famoso          ADJ             ADJ             amod            xxxx            1               0              
+hidalgo         hidalgo         NOUN            NOUN            nmod            xxxx            1               0              
+
+              
+              SPACE           SPACE           dep             
+              0               0              
+don             don             NOUN            NOUN            appos           xxx             1               0              </code></pre>
 </div>
+</div>
+</section>
+<section id="selección-de-nombres" class="level2" data-number="2.5">
+<h2 data-number="2.5" class="anchored" data-anchor-id="selección-de-nombres"><span class="header-section-number">2.5</span> Selección de nombres</h2>
 <div class="cell" data-execution_count="17">
 <details>
 <summary>Código</summary>
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> attr <span class="kw">in</span> <span class="bu">dir</span>(a):</span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> attr <span class="op">!=</span> <span class="st">'doc'</span> <span class="kw">and</span> attr <span class="op">!=</span> <span class="st">'sent'</span> <span class="kw">and</span> attr <span class="op">==</span> <span class="st">'label_'</span>:</span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"obj.</span><span class="sc">%s</span><span class="st"> = </span><span class="sc">%r</span><span class="st">"</span> <span class="op">%</span> (attr, <span class="bu">getattr</span>(a, attr)))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>nouns <span class="op">=</span> []</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> token <span class="kw">in</span> nlp(text).ents:</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> token.label_  <span class="op">==</span> <span class="st">'PER'</span>:</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>        nouns.append(token.lemma_)</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>nouns_tally <span class="op">=</span> Counter(nouns)</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame(nouns_tally.most_common(), columns<span class="op">=</span>[<span class="st">'noun'</span>, <span class="st">'count'</span>])</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>df[:<span class="dv">100</span>]</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-stdout">
-<pre><code>obj.label_ = 'MISC'</code></pre>
+<div class="cell-output cell-output-display" data-execution_count="17">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">noun</th>
+<th data-quarto-table-cell-role="th">count</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>Andrés</td>
+<td>7</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>Nicolás</td>
+<td>5</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>señor caballero</td>
+<td>5</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>Amadís de Gaula</td>
+<td>4</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>Amadís</td>
+<td>4</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">95</td>
+<td>Ténganse</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">96</td>
+<td>Capítulo VI</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">97</td>
+<td>Tomad</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">98</td>
+<td>hízolo</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">99</td>
+<td>Amadís de Grecia</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+
+<p>100 rows × 2 columns</p>
+</div>
 </div>
 </div>
 <div class="cell" data-execution_count="18">
 <details>
 <summary>Código</summary>
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co">#for named_entity in nlp(text).ents:</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="co">#    print(named_entity, named_entity.label_)</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>nouns <span class="op">=</span> []</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> token <span class="kw">in</span> nlp(text):</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> token.pos_ <span class="op">==</span> <span class="st">'NOUN'</span>:</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>        nouns.append(token.lemma_)</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>nouns_tally <span class="op">=</span> Counter(nouns)</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame(nouns_tally.most_common(), columns<span class="op">=</span>[<span class="st">'noun'</span>, <span class="st">'count'</span>])</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>df[:<span class="dv">100</span>]</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
+<div class="cell-output cell-output-display" data-execution_count="18">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">noun</th>
+<th data-quarto-table-cell-role="th">count</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>caballero</td>
+<td>61</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>don</td>
+<td>56</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>libro</td>
+<td>48</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>señor</td>
+<td>38</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>cura</td>
+<td>33</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">95</td>
+<td>hombre</td>
+<td>5</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">96</td>
+<td>batalla</td>
+<td>5</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">97</td>
+<td>gigante</td>
+<td>5</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">98</td>
+<td>valor</td>
+<td>5</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">99</td>
+<td>moza</td>
+<td>5</td>
+</tr>
+</tbody>
+</table>
+
+<p>100 rows × 2 columns</p>
 </div>
+</div>
+</div>
+<section id="visualizer-entity-recognizer" class="level3" data-number="2.5.1">
+<h3 data-number="2.5.1" class="anchored" data-anchor-id="visualizer-entity-recognizer"><span class="header-section-number">2.5.1</span> Visualizer (entity recognizer)</h3>
+<p>Visualizando el reconocedor de entidades. <a href="https://spacy.io/usage/visualizers#ent" class="uri">https://spacy.io/usage/visualizers#ent</a></p>
+<p>Usamos dos modelos distintos.</p>
 <div class="cell" data-execution_count="19">
 <details>
 <summary>Código</summary>
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co">#import spacy</span></span>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>text <span class="op">=</span> <span class="st">"María se fue en 2020 al río Guadiana a pescar peces coloridos mientras Mario iban a por bebida al supermercado Mercado"</span></span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="co">#nlp = spacy.load("es_core_news_md")</span></span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>doc <span class="op">=</span> nlp(text)[:<span class="dv">10</span>]</span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> token <span class="kw">in</span> doc:</span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(token.text, token.pos_, token.tag_ )</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>colors <span class="op">=</span> {<span class="st">"PER"</span>: <span class="st">"linear-gradient(90deg, #aa9cfc, #fc9ce7)"</span>,</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>          <span class="st">"LOC"</span>: <span class="st">"linear-gradient(90deg, orange, lightblue)"</span>}</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>options <span class="op">=</span> {<span class="co">#"ents": ["PER"], # si quisiéramos especificar las entidades que queremos mostrar</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>           <span class="st">"colors"</span>: colors}</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>doc <span class="op">=</span> nlp(text)</span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a><span class="co">#displacy.server(doc, style="ent", options=options, auto_select_port=True)</span></span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>displacy.render(doc, style<span class="op">=</span><span class="st">"ent"</span>, options<span class="op">=</span>options)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-stdout">
-<pre><code>Capítulo PROPN PROPN
-primero ADJ ADJ
-. PUNCT PUNCT
-Que SCONJ SCONJ
-trata VERB VERB
-de ADP ADP
-la DET DET
-condición NOUN NOUN
-y CCONJ CCONJ
-ejercicio NOUN NOUN</code></pre>
+<div class="cell-output cell-output-display">
+<span class="tex2jax_ignore"><div class="entities" style="line-height: 2.5; direction: ltr">
+<mark class="entity" style="background: linear-gradient(90deg, #aa9cfc, #fc9ce7); padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
+    María
+    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">PER</span>
+</mark>
+ se fue en 2020 al río 
+<mark class="entity" style="background: linear-gradient(90deg, orange, lightblue); padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
+    Guadiana
+    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">LOC</span>
+</mark>
+ a pescar peces coloridos mientras 
+<mark class="entity" style="background: linear-gradient(90deg, #aa9cfc, #fc9ce7); padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
+    Mario
+    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">PER</span>
+</mark>
+ iban a por bebida al supermercado 
+<mark class="entity" style="background: linear-gradient(90deg, orange, lightblue); padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
+    Mercado
+    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">LOC</span>
+</mark>
+</div></span>
 </div>
 </div>
-</section>
-<section id="ner" class="level2" data-number="2.5">
-<h2 data-number="2.5" class="anchored" data-anchor-id="ner"><span class="header-section-number">2.5</span> NER</h2>
-<p>Named-Entity Recognition.</p>
-<p>Realizamos esta subtarea de NPL mediante la librería spaCy.</p>
 <div class="cell" data-execution_count="20">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>documento <span class="op">=</span> nlp(text)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details>
+<summary>Código</summary>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>text <span class="op">=</span> <span class="st">"María se fue en 2020 al río Guadiana a pescar peces coloridos mientras Mario iban a por bebida al supermercado Mercado"</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>nlp_en <span class="op">=</span> spacy.load(<span class="st">"en_core_web_sm"</span>)</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>doc <span class="op">=</span> nlp_en(text)</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>displacy.render(doc, style<span class="op">=</span><span class="st">"ent"</span>, options<span class="op">=</span>options)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<span class="tex2jax_ignore"><div class="entities" style="line-height: 2.5; direction: ltr">
+<mark class="entity" style="background: #aa9cfc; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
+    María se fue
+    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">PERSON</span>
+</mark>
+ en 
+<mark class="entity" style="background: #bfe1d9; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
+    2020
+    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">DATE</span>
+</mark>
+ 
+<mark class="entity" style="background: #aa9cfc; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
+    al río Guadiana
+    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">PERSON</span>
+</mark>
+ a pescar peces coloridos mientras 
+<mark class="entity" style="background: #aa9cfc; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
+    Mario
+    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">PERSON</span>
+</mark>
+ iban a por bebida 
+<mark class="entity" style="background: #aa9cfc; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
+    al supermercado
+    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">PERSON</span>
+</mark>
+ 
+<mark class="entity" style="background: #feca74; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
+    Mercado
+    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">GPE</span>
+</mark>
+</div></span>
 </div>
-<p>Todas las entidades nombradas se encuentran en la propiedad <strong>document.ents</strong>.</p>
+</div>
 <div class="cell" data-execution_count="21">
 <details>
 <summary>Código</summary>
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> named_entity <span class="kw">in</span> <span class="bu">list</span>(documento.ents)[:<span class="dv">10</span>]:</span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(named_entity, named_entity.label_)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> spacy</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> spacy <span class="im">import</span> displacy</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>text <span class="op">=</span> <span class="st">"Cuando Mario Camacho empezó a trabajar en coches autónomos en Google en 2020, poca gente de fuera de la compañía lo tomó en serio"</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>doc <span class="op">=</span> nlp(text)</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>displacy.render(doc)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-stdout">
-<pre><code>Que trata de la condición MISC
-hidalgo PER
-la Mancha LOC
-Una olla de algo más vaca MISC
-El resto della MISC
-Tenía en su casa una MISC
-Frisaba LOC
-Quieren PER
-Quijada PER
-Quesada LOC</code></pre>
+<div class="cell-output cell-output-display">
+<span class="tex2jax_ignore"><svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" lang="es" id="a49f8efdab054a22907812693c77d8ea-0" class="displacy" width="4250" height="574.5" direction="ltr" style="max-width: none; height: 574.5px; color: #000000; background: #ffffff; font-family: Arial; direction: ltr">
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="484.5">
+    <tspan class="displacy-word" fill="currentColor" x="50">Cuando</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="50">SCONJ</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="484.5">
+    <tspan class="displacy-word" fill="currentColor" x="225">Mario</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="225">PROPN</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="484.5">
+    <tspan class="displacy-word" fill="currentColor" x="400">Camacho</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="400">PROPN</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="484.5">
+    <tspan class="displacy-word" fill="currentColor" x="575">empezó</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="575">VERB</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="484.5">
+    <tspan class="displacy-word" fill="currentColor" x="750">a</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="750">ADP</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="484.5">
+    <tspan class="displacy-word" fill="currentColor" x="925">trabajar</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="925">VERB</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="484.5">
+    <tspan class="displacy-word" fill="currentColor" x="1100">en</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="1100">ADP</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="484.5">
+    <tspan class="displacy-word" fill="currentColor" x="1275">coches</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="1275">NOUN</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="484.5">
+    <tspan class="displacy-word" fill="currentColor" x="1450">autónomos</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="1450">ADJ</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="484.5">
+    <tspan class="displacy-word" fill="currentColor" x="1625">en</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="1625">ADP</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="484.5">
+    <tspan class="displacy-word" fill="currentColor" x="1800">Google</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="1800">PROPN</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="484.5">
+    <tspan class="displacy-word" fill="currentColor" x="1975">en</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="1975">ADP</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="484.5">
+    <tspan class="displacy-word" fill="currentColor" x="2150">2020,</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="2150">NOUN</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="484.5">
+    <tspan class="displacy-word" fill="currentColor" x="2325">poca</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="2325">DET</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="484.5">
+    <tspan class="displacy-word" fill="currentColor" x="2500">gente</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="2500">NOUN</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="484.5">
+    <tspan class="displacy-word" fill="currentColor" x="2675">de</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="2675">ADP</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="484.5">
+    <tspan class="displacy-word" fill="currentColor" x="2850">fuera</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="2850">ADV</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="484.5">
+    <tspan class="displacy-word" fill="currentColor" x="3025">de</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="3025">ADP</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="484.5">
+    <tspan class="displacy-word" fill="currentColor" x="3200">la</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="3200">DET</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="484.5">
+    <tspan class="displacy-word" fill="currentColor" x="3375">compañía</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="3375">NOUN</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="484.5">
+    <tspan class="displacy-word" fill="currentColor" x="3550">lo</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="3550">PRON</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="484.5">
+    <tspan class="displacy-word" fill="currentColor" x="3725">tomó</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="3725">VERB</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="484.5">
+    <tspan class="displacy-word" fill="currentColor" x="3900">en</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="3900">ADP</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="484.5">
+    <tspan class="displacy-word" fill="currentColor" x="4075">serio</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="4075">NOUN</tspan>
+</text>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-a49f8efdab054a22907812693c77d8ea-0-0" stroke-width="2px" d="M70,439.5 C70,177.0 565.0,177.0 565.0,439.5" fill="none" stroke="currentColor"></path>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textpath href="#arrow-a49f8efdab054a22907812693c77d8ea-0-0" class="displacy-label" startoffset="50%" side="left" fill="currentColor" text-anchor="middle">mark</textpath>
+    </text>
+    <path class="displacy-arrowhead" d="M70,441.5 L62,429.5 78,429.5" fill="currentColor"></path>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-a49f8efdab054a22907812693c77d8ea-0-1" stroke-width="2px" d="M245,439.5 C245,264.5 560.0,264.5 560.0,439.5" fill="none" stroke="currentColor"></path>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textpath href="#arrow-a49f8efdab054a22907812693c77d8ea-0-1" class="displacy-label" startoffset="50%" side="left" fill="currentColor" text-anchor="middle">nsubj</textpath>
+    </text>
+    <path class="displacy-arrowhead" d="M245,441.5 L237,429.5 253,429.5" fill="currentColor"></path>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-a49f8efdab054a22907812693c77d8ea-0-2" stroke-width="2px" d="M245,439.5 C245,352.0 380.0,352.0 380.0,439.5" fill="none" stroke="currentColor"></path>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textpath href="#arrow-a49f8efdab054a22907812693c77d8ea-0-2" class="displacy-label" startoffset="50%" side="left" fill="currentColor" text-anchor="middle">flat</textpath>
+    </text>
+    <path class="displacy-arrowhead" d="M380.0,441.5 L388.0,429.5 372.0,429.5" fill="currentColor"></path>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-a49f8efdab054a22907812693c77d8ea-0-3" stroke-width="2px" d="M595,439.5 C595,2.0 3725.0,2.0 3725.0,439.5" fill="none" stroke="currentColor"></path>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textpath href="#arrow-a49f8efdab054a22907812693c77d8ea-0-3" class="displacy-label" startoffset="50%" side="left" fill="currentColor" text-anchor="middle">advcl</textpath>
+    </text>
+    <path class="displacy-arrowhead" d="M595,441.5 L587,429.5 603,429.5" fill="currentColor"></path>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-a49f8efdab054a22907812693c77d8ea-0-4" stroke-width="2px" d="M770,439.5 C770,352.0 905.0,352.0 905.0,439.5" fill="none" stroke="currentColor"></path>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textpath href="#arrow-a49f8efdab054a22907812693c77d8ea-0-4" class="displacy-label" startoffset="50%" side="left" fill="currentColor" text-anchor="middle">mark</textpath>
+    </text>
+    <path class="displacy-arrowhead" d="M770,441.5 L762,429.5 778,429.5" fill="currentColor"></path>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-a49f8efdab054a22907812693c77d8ea-0-5" stroke-width="2px" d="M595,439.5 C595,264.5 910.0,264.5 910.0,439.5" fill="none" stroke="currentColor"></path>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textpath href="#arrow-a49f8efdab054a22907812693c77d8ea-0-5" class="displacy-label" startoffset="50%" side="left" fill="currentColor" text-anchor="middle">xcomp</textpath>
+    </text>
+    <path class="displacy-arrowhead" d="M910.0,441.5 L918.0,429.5 902.0,429.5" fill="currentColor"></path>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-a49f8efdab054a22907812693c77d8ea-0-6" stroke-width="2px" d="M1120,439.5 C1120,352.0 1255.0,352.0 1255.0,439.5" fill="none" stroke="currentColor"></path>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textpath href="#arrow-a49f8efdab054a22907812693c77d8ea-0-6" class="displacy-label" startoffset="50%" side="left" fill="currentColor" text-anchor="middle">case</textpath>
+    </text>
+    <path class="displacy-arrowhead" d="M1120,441.5 L1112,429.5 1128,429.5" fill="currentColor"></path>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-a49f8efdab054a22907812693c77d8ea-0-7" stroke-width="2px" d="M595,439.5 C595,177.0 1265.0,177.0 1265.0,439.5" fill="none" stroke="currentColor"></path>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textpath href="#arrow-a49f8efdab054a22907812693c77d8ea-0-7" class="displacy-label" startoffset="50%" side="left" fill="currentColor" text-anchor="middle">obl</textpath>
+    </text>
+    <path class="displacy-arrowhead" d="M1265.0,441.5 L1273.0,429.5 1257.0,429.5" fill="currentColor"></path>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-a49f8efdab054a22907812693c77d8ea-0-8" stroke-width="2px" d="M1295,439.5 C1295,352.0 1430.0,352.0 1430.0,439.5" fill="none" stroke="currentColor"></path>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textpath href="#arrow-a49f8efdab054a22907812693c77d8ea-0-8" class="displacy-label" startoffset="50%" side="left" fill="currentColor" text-anchor="middle">amod</textpath>
+    </text>
+    <path class="displacy-arrowhead" d="M1430.0,441.5 L1438.0,429.5 1422.0,429.5" fill="currentColor"></path>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-a49f8efdab054a22907812693c77d8ea-0-9" stroke-width="2px" d="M1645,439.5 C1645,352.0 1780.0,352.0 1780.0,439.5" fill="none" stroke="currentColor"></path>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textpath href="#arrow-a49f8efdab054a22907812693c77d8ea-0-9" class="displacy-label" startoffset="50%" side="left" fill="currentColor" text-anchor="middle">case</textpath>
+    </text>
+    <path class="displacy-arrowhead" d="M1645,441.5 L1637,429.5 1653,429.5" fill="currentColor"></path>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-a49f8efdab054a22907812693c77d8ea-0-10" stroke-width="2px" d="M1295,439.5 C1295,264.5 1785.0,264.5 1785.0,439.5" fill="none" stroke="currentColor"></path>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textpath href="#arrow-a49f8efdab054a22907812693c77d8ea-0-10" class="displacy-label" startoffset="50%" side="left" fill="currentColor" text-anchor="middle">nmod</textpath>
+    </text>
+    <path class="displacy-arrowhead" d="M1785.0,441.5 L1793.0,429.5 1777.0,429.5" fill="currentColor"></path>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-a49f8efdab054a22907812693c77d8ea-0-11" stroke-width="2px" d="M1995,439.5 C1995,352.0 2130.0,352.0 2130.0,439.5" fill="none" stroke="currentColor"></path>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textpath href="#arrow-a49f8efdab054a22907812693c77d8ea-0-11" class="displacy-label" startoffset="50%" side="left" fill="currentColor" text-anchor="middle">case</textpath>
+    </text>
+    <path class="displacy-arrowhead" d="M1995,441.5 L1987,429.5 2003,429.5" fill="currentColor"></path>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-a49f8efdab054a22907812693c77d8ea-0-12" stroke-width="2px" d="M595,439.5 C595,89.5 2145.0,89.5 2145.0,439.5" fill="none" stroke="currentColor"></path>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textpath href="#arrow-a49f8efdab054a22907812693c77d8ea-0-12" class="displacy-label" startoffset="50%" side="left" fill="currentColor" text-anchor="middle">obl</textpath>
+    </text>
+    <path class="displacy-arrowhead" d="M2145.0,441.5 L2153.0,429.5 2137.0,429.5" fill="currentColor"></path>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-a49f8efdab054a22907812693c77d8ea-0-13" stroke-width="2px" d="M2345,439.5 C2345,352.0 2480.0,352.0 2480.0,439.5" fill="none" stroke="currentColor"></path>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textpath href="#arrow-a49f8efdab054a22907812693c77d8ea-0-13" class="displacy-label" startoffset="50%" side="left" fill="currentColor" text-anchor="middle">det</textpath>
+    </text>
+    <path class="displacy-arrowhead" d="M2345,441.5 L2337,429.5 2353,429.5" fill="currentColor"></path>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-a49f8efdab054a22907812693c77d8ea-0-14" stroke-width="2px" d="M2520,439.5 C2520,89.5 3720.0,89.5 3720.0,439.5" fill="none" stroke="currentColor"></path>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textpath href="#arrow-a49f8efdab054a22907812693c77d8ea-0-14" class="displacy-label" startoffset="50%" side="left" fill="currentColor" text-anchor="middle">iobj</textpath>
+    </text>
+    <path class="displacy-arrowhead" d="M2520,441.5 L2512,429.5 2528,429.5" fill="currentColor"></path>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-a49f8efdab054a22907812693c77d8ea-0-15" stroke-width="2px" d="M2695,439.5 C2695,352.0 2830.0,352.0 2830.0,439.5" fill="none" stroke="currentColor"></path>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textpath href="#arrow-a49f8efdab054a22907812693c77d8ea-0-15" class="displacy-label" startoffset="50%" side="left" fill="currentColor" text-anchor="middle">case</textpath>
+    </text>
+    <path class="displacy-arrowhead" d="M2695,441.5 L2687,429.5 2703,429.5" fill="currentColor"></path>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-a49f8efdab054a22907812693c77d8ea-0-16" stroke-width="2px" d="M2520,439.5 C2520,264.5 2835.0,264.5 2835.0,439.5" fill="none" stroke="currentColor"></path>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textpath href="#arrow-a49f8efdab054a22907812693c77d8ea-0-16" class="displacy-label" startoffset="50%" side="left" fill="currentColor" text-anchor="middle">advmod</textpath>
+    </text>
+    <path class="displacy-arrowhead" d="M2835.0,441.5 L2843.0,429.5 2827.0,429.5" fill="currentColor"></path>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-a49f8efdab054a22907812693c77d8ea-0-17" stroke-width="2px" d="M3045,439.5 C3045,264.5 3360.0,264.5 3360.0,439.5" fill="none" stroke="currentColor"></path>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textpath href="#arrow-a49f8efdab054a22907812693c77d8ea-0-17" class="displacy-label" startoffset="50%" side="left" fill="currentColor" text-anchor="middle">case</textpath>
+    </text>
+    <path class="displacy-arrowhead" d="M3045,441.5 L3037,429.5 3053,429.5" fill="currentColor"></path>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-a49f8efdab054a22907812693c77d8ea-0-18" stroke-width="2px" d="M3220,439.5 C3220,352.0 3355.0,352.0 3355.0,439.5" fill="none" stroke="currentColor"></path>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textpath href="#arrow-a49f8efdab054a22907812693c77d8ea-0-18" class="displacy-label" startoffset="50%" side="left" fill="currentColor" text-anchor="middle">det</textpath>
+    </text>
+    <path class="displacy-arrowhead" d="M3220,441.5 L3212,429.5 3228,429.5" fill="currentColor"></path>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-a49f8efdab054a22907812693c77d8ea-0-19" stroke-width="2px" d="M2870,439.5 C2870,177.0 3365.0,177.0 3365.0,439.5" fill="none" stroke="currentColor"></path>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textpath href="#arrow-a49f8efdab054a22907812693c77d8ea-0-19" class="displacy-label" startoffset="50%" side="left" fill="currentColor" text-anchor="middle">obl</textpath>
+    </text>
+    <path class="displacy-arrowhead" d="M3365.0,441.5 L3373.0,429.5 3357.0,429.5" fill="currentColor"></path>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-a49f8efdab054a22907812693c77d8ea-0-20" stroke-width="2px" d="M3570,439.5 C3570,352.0 3705.0,352.0 3705.0,439.5" fill="none" stroke="currentColor"></path>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textpath href="#arrow-a49f8efdab054a22907812693c77d8ea-0-20" class="displacy-label" startoffset="50%" side="left" fill="currentColor" text-anchor="middle">obj</textpath>
+    </text>
+    <path class="displacy-arrowhead" d="M3570,441.5 L3562,429.5 3578,429.5" fill="currentColor"></path>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-a49f8efdab054a22907812693c77d8ea-0-21" stroke-width="2px" d="M3745,439.5 C3745,352.0 3880.0,352.0 3880.0,439.5" fill="none" stroke="currentColor"></path>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textpath href="#arrow-a49f8efdab054a22907812693c77d8ea-0-21" class="displacy-label" startoffset="50%" side="left" fill="currentColor" text-anchor="middle">advmod</textpath>
+    </text>
+    <path class="displacy-arrowhead" d="M3880.0,441.5 L3888.0,429.5 3872.0,429.5" fill="currentColor"></path>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-a49f8efdab054a22907812693c77d8ea-0-22" stroke-width="2px" d="M3920,439.5 C3920,352.0 4055.0,352.0 4055.0,439.5" fill="none" stroke="currentColor"></path>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textpath href="#arrow-a49f8efdab054a22907812693c77d8ea-0-22" class="displacy-label" startoffset="50%" side="left" fill="currentColor" text-anchor="middle">fixed</textpath>
+    </text>
+    <path class="displacy-arrowhead" d="M4055.0,441.5 L4063.0,429.5 4047.0,429.5" fill="currentColor"></path>
+</g>
+</svg></span>
 </div>
 </div>
 <div class="cell" data-execution_count="22">
 <details>
 <summary>Código</summary>
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> collections <span class="im">import</span> Counter</span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>people <span class="op">=</span> []</span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> named_entity <span class="kw">in</span> documento.ents:</span>
-<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> named_entity.label_ <span class="op">==</span> <span class="st">"PER"</span>:</span>
-<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>        people.append(named_entity.text)</span>
-<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>people_tally <span class="op">=</span> Counter(people)</span>
-<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame(people_tally.most_common(), columns<span class="op">=</span>[<span class="st">'character'</span>, <span class="st">'count'</span>])</span>
-<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>a<span class="op">=</span>nlp(text).ents[<span class="dv">0</span>]</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-stdout">
-<pre><code>               character  count
-0                 Andrés      7
-1                Nicolás      5
-2        Amadís de Gaula      4
-3                 Amadís      4
-4              Rocinante      4
-..                   ...    ...
-133    Alonso de Ercilla      1
-134            Juan Rufo      1
-135  Cristóbal de Virués      1
-136           Lloráralas      1
-137               Ovidio      1
-
-[138 rows x 2 columns]</code></pre>
-</div>
 </div>
 <div class="cell" data-execution_count="23">
 <details>
 <summary>Código</summary>
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convertir el Counter a una tabla HTML</span></span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>html_table <span class="op">=</span> counter_to_html_table(people_tally)</span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Mostrar la tabla HTML</span></span>
-<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>display(HTML(html_table))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> attr <span class="kw">in</span> <span class="bu">dir</span>(a):</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> attr <span class="op">!=</span> <span class="st">'doc'</span> <span class="kw">and</span> attr <span class="op">!=</span> <span class="st">'sent'</span> <span class="kw">and</span> attr <span class="op">==</span> <span class="st">'label_'</span>:</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"obj.</span><span class="sc">%s</span><span class="st"> = </span><span class="sc">%r</span><span class="st">"</span> <span class="op">%</span> (attr, <span class="bu">getattr</span>(a, attr)))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>obj.label_ = 'PER'</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="24">
+<details>
+<summary>Código</summary>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co">#for named_entity in nlp(text).ents:</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="co">#    print(named_entity, named_entity.label_)</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell" data-execution_count="25">
+<details>
+<summary>Código</summary>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co">#import spacy</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="co">#nlp = spacy.load("es_core_news_md")</span></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>doc <span class="op">=</span> nlp(text)[:<span class="dv">10</span>]</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> token <span class="kw">in</span> doc:</span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(token.text, token.pos_, token.tag_ )</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Cuando SCONJ SCONJ
+Mario PROPN PROPN
+Camacho PROPN PROPN
+empezó VERB VERB
+a ADP ADP
+trabajar VERB VERB
+en ADP ADP
+coches NOUN NOUN
+autónomos ADJ ADJ
+en ADP ADP</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="ner" class="level2" data-number="2.6">
+<h2 data-number="2.6" class="anchored" data-anchor-id="ner"><span class="header-section-number">2.6</span> NER</h2>
+<p>Named-Entity Recognition.</p>
+<p>Realizamos esta subtarea de NPL mediante la librería spaCy.</p>
+<div class="cell" data-execution_count="26">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>documento <span class="op">=</span> nlp(text)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Todas las entidades nombradas se encuentran en la propiedad <strong>document.ents</strong>.</p>
+<div class="cell" data-execution_count="27">
+<details>
+<summary>Código</summary>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> named_entity <span class="kw">in</span> <span class="bu">list</span>(documento.ents)[:<span class="dv">10</span>]:</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(named_entity, named_entity.label_)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Mario Camacho PER
+Google ORG</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="28">
+<details>
+<summary>Código</summary>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> collections <span class="im">import</span> Counter</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>people <span class="op">=</span> []</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> named_entity <span class="kw">in</span> documento.ents:</span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> named_entity.label_ <span class="op">==</span> <span class="st">"PER"</span>:</span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>        people.append(named_entity.text)</span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a>people_tally <span class="op">=</span> Counter(people)</span>
+<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame(people_tally.most_common(), columns<span class="op">=</span>[<span class="st">'character'</span>, <span class="st">'count'</span>])</span>
+<span id="cb36-12"><a href="#cb36-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>       character  count
+0  Mario Camacho      1</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="29">
+<details>
+<summary>Código</summary>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convertir el Counter a una tabla HTML</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>html_table <span class="op">=</span> counter_to_html_table(people_tally)</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Mostrar la tabla HTML</span></span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>display(HTML(html_table))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 
@@ -688,555 +1292,7 @@ Quesada LOC</code></pre>
 </thead>
 <tbody>
 <tr class="odd table-row" style="">
-<td>hidalgo</td>
-<td>2</td>
-</tr>
-<tr class="even table-row" style="">
-<td>Quieren</td>
-<td>1</td>
-</tr>
-<tr class="odd table-row" style="">
-<td>Quijada</td>
-<td>1</td>
-</tr>
-<tr class="even table-row" style="">
-<td>Feliciano de Silva</td>
-<td>1</td>
-</tr>
-<tr class="odd table-row" style="">
-<td>Aristóteles</td>
-<td>1</td>
-</tr>
-<tr class="even table-row" style="display: none;">
-<td>Belianís</td>
-<td>1</td>
-</tr>
-<tr class="odd table-row" style="display: none;">
-<td>recebía</td>
-<td>2</td>
-</tr>
-<tr class="even table-row" style="display: none;">
-<td>Palmerín de Ingalaterra</td>
-<td>1</td>
-</tr>
-<tr class="odd table-row" style="display: none;">
-<td>Amadís de Gaula</td>
-<td>4</td>
-</tr>
-<tr class="even table-row" style="display: none;">
-<td>Nicolás</td>
-<td>5</td>
-</tr>
-<tr class="odd table-row" style="display: none;">
-<td>Galaor</td>
-<td>1</td>
-</tr>
-<tr class="even table-row" style="display: none;">
-<td>Llenósele</td>
-<td>1</td>
-</tr>
-<tr class="odd table-row" style="display: none;">
-<td>Decía</td>
-<td>3</td>
-</tr>
-<tr class="even table-row" style="display: none;">
-<td>el Cid Ruy Díaz</td>
-<td>1</td>
-</tr>
-<tr class="odd table-row" style="display: none;">
-<td>el Caballero</td>
-<td>1</td>
-</tr>
-<tr class="even table-row" style="display: none;">
-<td>Ardiente Espada</td>
-<td>1</td>
-</tr>
-<tr class="odd table-row" style="display: none;">
-<td>Bernardo del Carpio</td>
-<td>2</td>
-</tr>
-<tr class="even table-row" style="display: none;">
-<td>Roldán</td>
-<td>1</td>
-</tr>
-<tr class="odd table-row" style="display: none;">
-<td>Hércules</td>
-<td>1</td>
-</tr>
-<tr class="even table-row" style="display: none;">
-<td>Anteo</td>
-<td>1</td>
-</tr>
-<tr class="odd table-row" style="display: none;">
-<td>Morgante</td>
-<td>1</td>
-</tr>
-<tr class="even table-row" style="display: none;">
-<td>Reinaldos</td>
-<td>1</td>
-</tr>
-<tr class="odd table-row" style="display: none;">
-<td>allende</td>
-<td>1</td>
-</tr>
-<tr class="even table-row" style="display: none;">
-<td>Mahoma</td>
-<td>2</td>
-</tr>
-<tr class="odd table-row" style="display: none;">
-<td>Diera</td>
-<td>1</td>
-</tr>
-<tr class="even table-row" style="display: none;">
-<td>Amadís</td>
-<td>4</td>
-</tr>
-<tr class="odd table-row" style="display: none;">
-<td>Hepila</td>
-<td>1</td>
-</tr>
-<tr class="even table-row" style="display: none;">
-<td>Limpias</td>
-<td>1</td>
-</tr>
-<tr class="odd table-row" style="display: none;">
-<td>Dulcinea</td>
-<td>2</td>
-</tr>
-<tr class="even table-row" style="display: none;">
-<td>Toboso</td>
-<td>1</td>
-</tr>
-<tr class="odd table-row" style="display: none;">
-<td>Capítulo II</td>
-<td>1</td>
-</tr>
-<tr class="even table-row" style="display: none;">
-<td>Rocinante</td>
-<td>4</td>
-</tr>
-<tr class="odd table-row" style="display: none;">
-<td>Apolo</td>
-<td>4</td>
-</tr>
-<tr class="even table-row" style="display: none;">
-<td>mías</td>
-<td>3</td>
-</tr>
-<tr class="odd table-row" style="display: none;">
-<td>habedes</td>
-<td>1</td>
-</tr>
-<tr class="even table-row" style="display: none;">
-<td>Diose</td>
-<td>1</td>
-</tr>
-<tr class="odd table-row" style="display: none;">
-<td>della</td>
-<td>1</td>
-</tr>
-<tr class="even table-row" style="display: none;">
-<td>Mirábanle</td>
-<td>1</td>
-</tr>
-<tr class="odd table-row" style="display: none;">
-<td>mucha sandez</td>
-<td>1</td>
-</tr>
-<tr class="even table-row" style="display: none;">
-<td>señor caballero</td>
-<td>2</td>
-</tr>
-<tr class="odd table-row" style="display: none;">
-<td>Preguntáronle</td>
-<td>1</td>
-</tr>
-<tr class="even table-row" style="display: none;">
-<td>Capítulo III</td>
-<td>1</td>
-</tr>
-<tr class="odd table-row" style="display: none;">
-<td>Antojósele</td>
-<td>1</td>
-</tr>
-<tr class="even table-row" style="display: none;">
-<td>Acorredme</td>
-<td>1</td>
-</tr>
-<tr class="odd table-row" style="display: none;">
-<td>Sancho Bienaya</td>
-<td>1</td>
-</tr>
-<tr class="even table-row" style="display: none;">
-<td>Don</td>
-<td>1</td>
-</tr>
-<tr class="odd table-row" style="display: none;">
-<td>doña Tolosa</td>
-<td>1</td>
-</tr>
-<tr class="even table-row" style="display: none;">
-<td>Molinera</td>
-<td>1</td>
-</tr>
-<tr class="odd table-row" style="display: none;">
-<td>Capítulo IV</td>
-<td>1</td>
-</tr>
-<tr class="even table-row" style="display: none;">
-<td>Gracias</td>
-<td>1</td>
-</tr>
-<tr class="odd table-row" style="display: none;">
-<td>Dios</td>
-<td>1</td>
-</tr>
-<tr class="even table-row" style="display: none;">
-<td>Descortés caballero</td>
-<td>1</td>
-</tr>
-<tr class="odd table-row" style="display: none;">
-<td>Señor caballero</td>
-<td>3</td>
-</tr>
-<tr class="even table-row" style="display: none;">
-<td>ruin villano?</td>
-<td>1</td>
-</tr>
-<tr class="odd table-row" style="display: none;">
-<td>Pagadle</td>
-<td>1</td>
-</tr>
-<tr class="even table-row" style="display: none;">
-<td>Él</td>
-<td>1</td>
-</tr>
-<tr class="odd table-row" style="display: none;">
-<td>Andrés</td>
-<td>7</td>
-</tr>
-<tr class="even table-row" style="display: none;">
-<td>San Bartolomé</td>
-<td>1</td>
-</tr>
-<tr class="odd table-row" style="display: none;">
-<td>Mire</td>
-<td>2</td>
-</tr>
-<tr class="even table-row" style="display: none;">
-<td>Juan</td>
-<td>1</td>
-</tr>
-<tr class="odd table-row" style="display: none;">
-<td>Haldudo</td>
-<td>1</td>
-</tr>
-<tr class="even table-row" style="display: none;">
-<td>Venid</td>
-<td>1</td>
-</tr>
-<tr class="odd table-row" style="display: none;">
-<td>Roque</td>
-<td>1</td>
-</tr>
-<tr class="even table-row" style="display: none;">
-<td>Llamad</td>
-<td>1</td>
-</tr>
-<tr class="odd table-row" style="display: none;">
-<td>contalle</td>
-<td>1</td>
-</tr>
-<tr class="even table-row" style="display: none;">
-<td>Dulcinea del Toboso</td>
-<td>2</td>
-</tr>
-<tr class="odd table-row" style="display: none;">
-<td>Cayó Rocinante</td>
-<td>1</td>
-</tr>
-<tr class="even table-row" style="display: none;">
-<td>Dábanle</td>
-<td>1</td>
-</tr>
-<tr class="odd table-row" style="display: none;">
-<td>Cansóse</td>
-<td>1</td>
-</tr>
-<tr class="even table-row" style="display: none;">
-<td>Capítulo V.</td>
-<td>1</td>
-</tr>
-<tr class="odd table-row" style="display: none;">
-<td>Valdovinos</td>
-<td>4</td>
-</tr>
-<tr class="even table-row" style="display: none;">
-<td>Carloto</td>
-<td>1</td>
-</tr>
-<tr class="odd table-row" style="display: none;">
-<td>Emperante</td>
-<td>1</td>
-</tr>
-<tr class="even table-row" style="display: none;">
-<td>Señor Quijana</td>
-<td>1</td>
-</tr>
-<tr class="odd table-row" style="display: none;">
-<td>Abindarráez</td>
-<td>2</td>
-</tr>
-<tr class="even table-row" style="display: none;">
-<td>Rodrigo de Narváez</td>
-<td>4</td>
-</tr>
-<tr class="odd table-row" style="display: none;">
-<td>Abencerraje</td>
-<td>1</td>
-</tr>
-<tr class="even table-row" style="display: none;">
-<td>Jorge</td>
-<td>1</td>
-</tr>
-<tr class="odd table-row" style="display: none;">
-<td>Rodrigo</td>
-<td>1</td>
-</tr>
-<tr class="even table-row" style="display: none;">
-<td>Narváez</td>
-<td>1</td>
-</tr>
-<tr class="odd table-row" style="display: none;">
-<td>Pedro Alonso</td>
-<td>1</td>
-</tr>
-<tr class="even table-row" style="display: none;">
-<td>hidalgo del señor</td>
-<td>1</td>
-</tr>
-<tr class="odd table-row" style="display: none;">
-<td>Quijana.</td>
-<td>1</td>
-</tr>
-<tr class="even table-row" style="display: none;">
-<td>Pero Pérez</td>
-<td>1</td>
-</tr>
-<tr class="odd table-row" style="display: none;">
-<td>Satanás</td>
-<td>1</td>
-</tr>
-<tr class="even table-row" style="display: none;">
-<td>Barrabás</td>
-<td>1</td>
-</tr>
-<tr class="odd table-row" style="display: none;">
-<td>vuestras mercedes</td>
-<td>1</td>
-</tr>
-<tr class="even table-row" style="display: none;">
-<td>moro Abindarráez</td>
-<td>1</td>
-</tr>
-<tr class="odd table-row" style="display: none;">
-<td>Ténganse</td>
-<td>1</td>
-</tr>
-<tr class="even table-row" style="display: none;">
-<td>Capítulo VI</td>
-<td>1</td>
-</tr>
-<tr class="odd table-row" style="display: none;">
-<td>Esplandián</td>
-<td>2</td>
-</tr>
-<tr class="even table-row" style="display: none;">
-<td>Tomad</td>
-<td>1</td>
-</tr>
-<tr class="odd table-row" style="display: none;">
-<td>Hízolo</td>
-<td>1</td>
-</tr>
-<tr class="even table-row" style="display: none;">
-<td>Amadís de Grecia</td>
-<td>1</td>
-</tr>
-<tr class="odd table-row" style="display: none;">
-<td>Pintiquiniestra</td>
-<td>1</td>
-</tr>
-<tr class="even table-row" style="display: none;">
-<td>Darinel</td>
-<td>1</td>
-</tr>
-<tr class="odd table-row" style="display: none;">
-<td>me engendró</td>
-<td>1</td>
-</tr>
-<tr class="even table-row" style="display: none;">
-<td>Don Olivante de Laura</td>
-<td>1</td>
-</tr>
-<tr class="odd table-row" style="display: none;">
-<td>Florimorte de Hircania</td>
-<td>1</td>
-</tr>
-<tr class="even table-row" style="display: none;">
-<td>Florimorte</td>
-<td>1</td>
-</tr>
-<tr class="odd table-row" style="display: none;">
-<td>Abrióse</td>
-<td>1</td>
-</tr>
-<tr class="even table-row" style="display: none;">
-<td>Montalbán</td>
-<td>2</td>
-</tr>
-<tr class="odd table-row" style="display: none;">
-<td>Turpín</td>
-<td>1</td>
-</tr>
-<tr class="even table-row" style="display: none;">
-<td>Mateo Boyardo</td>
-<td>1</td>
-</tr>
-<tr class="odd table-row" style="display: none;">
-<td>Ludovico Ariosto</td>
-<td>1</td>
-</tr>
-<tr class="even table-row" style="display: none;">
-<td>Palmerín de Oliva</td>
-<td>1</td>
-</tr>
-<tr class="odd table-row" style="display: none;">
-<td>Palmerín</td>
-<td>1</td>
-</tr>
-<tr class="even table-row" style="display: none;">
-<td>Ingalaterra</td>
-<td>2</td>
-</tr>
-<tr class="odd table-row" style="display: none;">
-<td>Alejandro</td>
-<td>1</td>
-</tr>
-<tr class="even table-row" style="display: none;">
-<td>Dario</td>
-<td>1</td>
-</tr>
-<tr class="odd table-row" style="display: none;">
-<td>Homero</td>
-<td>1</td>
-</tr>
-<tr class="even table-row" style="display: none;">
-<td>Don Belianís</td>
-<td>1</td>
-</tr>
-<tr class="odd table-row" style="display: none;">
-<td>Tirante el Blanco</td>
-<td>1</td>
-</tr>
-<tr class="even table-row" style="display: none;">
-<td>Tirante</td>
-<td>2</td>
-</tr>
-<tr class="odd table-row" style="display: none;">
-<td>Aquí</td>
-<td>1</td>
-</tr>
-<tr class="even table-row" style="display: none;">
-<td>Tomás de Montalbán</td>
-<td>1</td>
-</tr>
-<tr class="odd table-row" style="display: none;">
-<td>Fonseca</td>
-<td>1</td>
-</tr>
-<tr class="even table-row" style="display: none;">
-<td>Placerdemivida</td>
-<td>1</td>
-</tr>
-<tr class="odd table-row" style="display: none;">
-<td>Reposada</td>
-<td>1</td>
-</tr>
-<tr class="even table-row" style="display: none;">
-<td>Emperatriz</td>
-<td>1</td>
-</tr>
-<tr class="odd table-row" style="display: none;">
-<td>Hipólito</td>
-<td>1</td>
-</tr>
-<tr class="even table-row" style="display: none;">
-<td>La Diana</td>
-<td>3</td>
-</tr>
-<tr class="odd table-row" style="display: none;">
-<td>Jorge de Montemayor</td>
-<td>1</td>
-</tr>
-<tr class="even table-row" style="display: none;">
-<td>Felicia</td>
-<td>1</td>
-</tr>
-<tr class="odd table-row" style="display: none;">
-<td>Salmantino</td>
-<td>2</td>
-</tr>
-<tr class="even table-row" style="display: none;">
-<td>Gil Polo</td>
-<td>2</td>
-</tr>
-<tr class="odd table-row" style="display: none;">
-<td>Fortuna</td>
-<td>1</td>
-</tr>
-<tr class="even table-row" style="display: none;">
-<td>Antonio de Lofraso</td>
-<td>1</td>
-</tr>
-<tr class="odd table-row" style="display: none;">
-<td>recebí</td>
-<td>1</td>
-</tr>
-<tr class="even table-row" style="display: none;">
-<td>Desengaños</td>
-<td>1</td>
-</tr>
-<tr class="odd table-row" style="display: none;">
-<td>El Cancionero de López Maldonado</td>
-<td>1</td>
-</tr>
-<tr class="even table-row" style="display: none;">
-<td>Miguel de Cervantes</td>
-<td>1</td>
-</tr>
-<tr class="odd table-row" style="display: none;">
-<td>Cervantes</td>
-<td>1</td>
-</tr>
-<tr class="even table-row" style="display: none;">
-<td>Alonso de Ercilla</td>
-<td>1</td>
-</tr>
-<tr class="odd table-row" style="display: none;">
-<td>Juan Rufo</td>
-<td>1</td>
-</tr>
-<tr class="even table-row" style="display: none;">
-<td>Cristóbal de Virués</td>
-<td>1</td>
-</tr>
-<tr class="odd table-row" style="display: none;">
-<td>Lloráralas</td>
-<td>1</td>
-</tr>
-<tr class="even table-row" style="display: none;">
-<td>Ovidio</td>
+<td>Mario Camacho</td>
 <td>1</td>
 </tr>
 </tbody>
@@ -1284,96 +1340,87 @@ Quesada LOC</code></pre>
 </div>
 </div>
 <p><strong>Etiquetas NER</strong> Las entidades nombradas son frases que contienen los nombres de personas, organizaciones, ubicaciones, expresiones de tiempo, cantidades, entre otras. Las entidades de interés se almacenan con su etiqueta correspondiente (por ejemplo, ‘PER‘ para personas, ‘LOC‘ para lugares, ‘ORG’ para organizaciones y ‘MISC’ que se emplea como un comodín para las tres anteriores) y sus posiciones en el texto (cable aclarar que el modelo que se utiliza mediante spaCy ya tiene las etiquetas predefinidas).</p>
-<div class="cell" data-execution_count="24">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="bu">getattr</span>(nlp.get_pipe(<span class="st">'ner'</span>), <span class="st">'labels'</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="24">
+<div class="cell" data-execution_count="30">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="bu">getattr</span>(nlp.get_pipe(<span class="st">'ner'</span>), <span class="st">'labels'</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="30">
 <pre><code>('LOC', 'MISC', 'ORG', 'PER')</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="25">
+<div class="cell" data-execution_count="31">
 <details>
 <summary>Código</summary>
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> Markdown, display</span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re</span>
-<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_ner_in_context(keyword, document, desired_ner_labels<span class="op">=</span> <span class="va">False</span>):</span>
-<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> desired_ner_labels <span class="op">!=</span> <span class="va">False</span>:</span>
-<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>        desired_ner_labels <span class="op">=</span> desired_ner_labels</span>
-<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
-<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>         <span class="co"># all possible labels</span></span>
-<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a>        desired_ner_labels <span class="op">=</span> <span class="bu">list</span>(nlp.get_pipe(<span class="st">'ner'</span>).labels)  </span>
-<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb34-12"><a href="#cb34-12" aria-hidden="true" tabindex="-1"></a>    <span class="co">#Iterate through all the sentences in the document and pull out the text of each sentence</span></span>
-<span id="cb34-13"><a href="#cb34-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> sentence <span class="kw">in</span> document.sents:</span>
-<span id="cb34-14"><a href="#cb34-14" aria-hidden="true" tabindex="-1"></a>        <span class="co">#process each sentence</span></span>
-<span id="cb34-15"><a href="#cb34-15" aria-hidden="true" tabindex="-1"></a>        sentence_doc <span class="op">=</span> nlp(sentence.text)</span>
-<span id="cb34-16"><a href="#cb34-16" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> named_entity <span class="kw">in</span> sentence_doc.ents:</span>
-<span id="cb34-17"><a href="#cb34-17" aria-hidden="true" tabindex="-1"></a>            <span class="co">#Check to see if the keyword is in the sentence (and ignore capitalization by making both lowercase)</span></span>
-<span id="cb34-18"><a href="#cb34-18" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> keyword.lower() <span class="kw">in</span> named_entity.text.lower()  <span class="kw">and</span> named_entity.label_ <span class="kw">in</span> desired_ner_labels:</span>
-<span id="cb34-19"><a href="#cb34-19" aria-hidden="true" tabindex="-1"></a>                <span class="co">#Use the regex library to replace linebreaks and to make the keyword bolded, again ignoring capitalization</span></span>
-<span id="cb34-20"><a href="#cb34-20" aria-hidden="true" tabindex="-1"></a>            </span>
-<span id="cb34-21"><a href="#cb34-21" aria-hidden="true" tabindex="-1"></a>                sentence_text <span class="op">=</span> re.sub(<span class="st">'</span><span class="ch">\n</span><span class="st">'</span>, <span class="st">' '</span>, sentence.text)</span>
-<span id="cb34-22"><a href="#cb34-22" aria-hidden="true" tabindex="-1"></a>                sentence_text <span class="op">=</span> re.sub(<span class="ss">f"</span><span class="sc">{</span>named_entity<span class="sc">.</span>text<span class="sc">}</span><span class="ss">"</span>, <span class="ss">f"**</span><span class="sc">{</span>named_entity<span class="sc">.</span>text<span class="sc">}</span><span class="ss">**"</span>, sentence_text, flags<span class="op">=</span>re.IGNORECASE)</span>
-<span id="cb34-23"><a href="#cb34-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-24"><a href="#cb34-24" aria-hidden="true" tabindex="-1"></a>                display(Markdown(<span class="st">'--'</span>)) <span class="co"># Si pones --- te sale una línea de izq a drcha</span></span>
-<span id="cb34-25"><a href="#cb34-25" aria-hidden="true" tabindex="-1"></a>                display(Markdown(<span class="ss">f"**</span><span class="sc">{</span>named_entity<span class="sc">.</span>label_<span class="sc">}</span><span class="ss">**"</span>))</span>
-<span id="cb34-26"><a href="#cb34-26" aria-hidden="true" tabindex="-1"></a>                display(Markdown(sentence_text))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> Markdown, display</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re</span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_ner_in_context(keyword, document, desired_ner_labels<span class="op">=</span> <span class="va">False</span>):</span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> desired_ner_labels <span class="op">!=</span> <span class="va">False</span>:</span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a>        desired_ner_labels <span class="op">=</span> desired_ner_labels</span>
+<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a>         <span class="co"># all possible labels</span></span>
+<span id="cb41-10"><a href="#cb41-10" aria-hidden="true" tabindex="-1"></a>        desired_ner_labels <span class="op">=</span> <span class="bu">list</span>(nlp.get_pipe(<span class="st">'ner'</span>).labels)  </span>
+<span id="cb41-11"><a href="#cb41-11" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb41-12"><a href="#cb41-12" aria-hidden="true" tabindex="-1"></a>    <span class="co">#Iterate through all the sentences in the document and pull out the text of each sentence</span></span>
+<span id="cb41-13"><a href="#cb41-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> sentence <span class="kw">in</span> document.sents:</span>
+<span id="cb41-14"><a href="#cb41-14" aria-hidden="true" tabindex="-1"></a>        <span class="co">#process each sentence</span></span>
+<span id="cb41-15"><a href="#cb41-15" aria-hidden="true" tabindex="-1"></a>        sentence_doc <span class="op">=</span> nlp(sentence.text)</span>
+<span id="cb41-16"><a href="#cb41-16" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> named_entity <span class="kw">in</span> sentence_doc.ents:</span>
+<span id="cb41-17"><a href="#cb41-17" aria-hidden="true" tabindex="-1"></a>            <span class="co">#Check to see if the keyword is in the sentence (and ignore capitalization by making both lowercase)</span></span>
+<span id="cb41-18"><a href="#cb41-18" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> keyword.lower() <span class="kw">in</span> named_entity.text.lower()  <span class="kw">and</span> named_entity.label_ <span class="kw">in</span> desired_ner_labels:</span>
+<span id="cb41-19"><a href="#cb41-19" aria-hidden="true" tabindex="-1"></a>                <span class="co">#Use the regex library to replace linebreaks and to make the keyword bolded, again ignoring capitalization</span></span>
+<span id="cb41-20"><a href="#cb41-20" aria-hidden="true" tabindex="-1"></a>            </span>
+<span id="cb41-21"><a href="#cb41-21" aria-hidden="true" tabindex="-1"></a>                sentence_text <span class="op">=</span> re.sub(<span class="st">'</span><span class="ch">\n</span><span class="st">'</span>, <span class="st">' '</span>, sentence.text)</span>
+<span id="cb41-22"><a href="#cb41-22" aria-hidden="true" tabindex="-1"></a>                sentence_text <span class="op">=</span> re.sub(<span class="ss">f"</span><span class="sc">{</span>named_entity<span class="sc">.</span>text<span class="sc">}</span><span class="ss">"</span>, <span class="ss">f"**</span><span class="sc">{</span>named_entity<span class="sc">.</span>text<span class="sc">}</span><span class="ss">**"</span>, sentence_text, flags<span class="op">=</span>re.IGNORECASE)</span>
+<span id="cb41-23"><a href="#cb41-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-24"><a href="#cb41-24" aria-hidden="true" tabindex="-1"></a>                display(Markdown(<span class="st">'--'</span>)) <span class="co"># Si pones --- te sale una línea de izq a drcha</span></span>
+<span id="cb41-25"><a href="#cb41-25" aria-hidden="true" tabindex="-1"></a>                display(Markdown(<span class="ss">f"**</span><span class="sc">{</span>named_entity<span class="sc">.</span>label_<span class="sc">}</span><span class="ss">**"</span>))</span>
+<span id="cb41-26"><a href="#cb41-26" aria-hidden="true" tabindex="-1"></a>                display(Markdown(sentence_text))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div class="cell" data-execution_count="26">
+<div class="cell" data-execution_count="32">
 <details>
 <summary>Código</summary>
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="bu">type</span>(doc)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="bu">type</span>(doc)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="26">
+<div class="cell-output cell-output-display" data-execution_count="32">
 <pre><code>spacy.tokens.span.Span</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="27">
+<div class="cell" data-execution_count="33">
 <details>
 <summary>Código</summary>
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>get_ner_in_context(<span class="st">'Sancho'</span>, nlp(text), desired_ner_labels <span class="op">=</span> <span class="va">False</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>get_ner_in_context(<span class="st">'Sancho'</span>, nlp(text), desired_ner_labels <span class="op">=</span> <span class="va">False</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display">
-<p>–</p>
 </div>
-<div class="cell-output cell-output-display">
-<p><strong>PER</strong></p>
-</div>
-<div class="cell-output cell-output-display">
-<p>Ella respondió con mucha humildad que se llamaba la Tolosa, y que era hija de un remendón natural de Toledo que vivía a las tendillas de <strong>Sancho Bienaya</strong>, y que dondequiera que ella estuviese le serviría y le tendría por señor.</p>
-</div>
-</div>
-<div class="cell" data-execution_count="28">
+<div class="cell" data-execution_count="34">
 <details>
 <summary>Código</summary>
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> spacy</span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>nlp <span class="op">=</span> spacy.load(<span class="st">"es_core_news_md"</span>)</span>
-<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>doc <span class="op">=</span> nlp(<span class="st">"Apple está pensando en comprar una startup de España por 5.000 €."</span>)</span>
-<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> ent <span class="kw">in</span> doc.ents:</span>
-<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(ent.text, ent.label_)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> spacy</span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>nlp <span class="op">=</span> spacy.load(<span class="st">"es_core_news_md"</span>)</span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>doc <span class="op">=</span> nlp(<span class="st">"Apple está pensando en comprar una startup de España por 5.000 €."</span>)</span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> ent <span class="kw">in</span> doc.ents:</span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(ent.text, ent.label_)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Apple ORG
 España ORG</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="29">
+<div class="cell" data-execution_count="35">
 <details>
 <summary>Código</summary>
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>doc</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>doc</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="29">
+<div class="cell-output cell-output-display" data-execution_count="35">
 <pre><code>Apple está pensando en comprar una startup de España por 5.000 €.</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="30">
+<div class="cell" data-execution_count="36">
 <details>
 <summary>Código</summary>
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>get_ner_in_context</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>get_ner_in_context</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="30">
+<div class="cell-output cell-output-display" data-execution_count="36">
 <pre><code>&lt;function __main__.get_ner_in_context(keyword, document, desired_ner_labels=False)&gt;</code></pre>
 </div>
 </div>
@@ -1625,13 +1672,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     <div class="nav-footer-center">
       <ul class="footer-items list-unstyled">
     <li class="nav-item">
-    <a class="nav-link" href="./about.html">About</a>
-  </li>  
-    <li class="nav-item">
     <a class="nav-link" href="./license.qmd">License</a>
-  </li>  
-    <li class="nav-item">
-    <a class="nav-link" href="./trademark.qmd">Trademark</a>
   </li>  
 </ul>
     </div>
