@@ -11,7 +11,7 @@ body {
 }
 
 /* Encabezados */
-h1, h2, h3 {
+h1, h2, h3, h4, h5 {
     color: #2E86C1;
     border-bottom: 2px solid #AED6F1;
     padding-bottom: 5px;
@@ -30,23 +30,32 @@ h3 {
     font-size: 1.75em;
 }
 
+h4 {
+    font-size: 1.55em;
+}
+
+h5 {
+    font-size: 1.25em;
+}
+
 /* Tablas */
 table {
-    width: 100%;
     border-collapse: collapse;
     margin-bottom: 20px;
     background-color: #ffffff;
+    table-layout: auto;
 }
 
 table, th, td {
     border: 1px solid #dddddd;
     text-align: left;
     padding: 8px;
+    white-space: nowrap;
 }
 
 th {
-    background-color: #2E86C1;
-    color: white;
+    background-color: red;
+    color: black;
 }
 
 tr:nth-child(even) {
