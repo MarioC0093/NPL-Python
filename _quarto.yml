@@ -27,7 +27,7 @@ website:
   page-footer:
     center: 
       - text: "License"
-        href: license.qmd
+        href: LICENSE.html
 
 abstract: |
   La aplicación de nuevas fuentes de Inteligencia Artificial en el lenguaje humano está en auge desde la aparición de las IA Generativas de texto.
@@ -43,6 +43,7 @@ format:
     toc-title: "Índice"
     toc-location: left
     toc-expand: TRUE
+    toc-depth: 8
     number-sections: TRUE
     theme: style.css
     page-layout: full
