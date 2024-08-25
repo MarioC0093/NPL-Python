@@ -10,10 +10,13 @@ website:
       - href: 'https://github.com/MarioC0093'
         icon: github
         text: My repositories
+      - href: 'https://www.linkedin.com/in/mario-camacho-b98462ab/'
+        icon: linkedin
+        text: "LinkedIn"
   twitter-card: true
   navbar:
     left:
-      - href: index.ipynb
+      - href: 'https://github.com/MarioC0093/NPL-Python/'
         text: Home
       - href: about.html
         text: About

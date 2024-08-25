@@ -2,4 +2,10 @@
 title: "About"
 ---
 
-About this site
+# Resumen
+Este proyecto explora la aplicación de nuevas fuentes de Inteligencia Artificial en el procesamiento del lenguaje natural (NLP) utilizando Python. Con el auge de las IA generativas de texto, es crucial establecer un pipeline sólido para abordar problemas complejos en NLP. Este pipeline está diseñado para guiar desde los primeros pasos en el procesamiento del lenguaje hasta la resolución de tareas más avanzadas.
+
+# Objetivos
+- Desarrollar una guía práctica y reutilizable sobre el NLP.
+- Facilitar la comprensión de los procesos involucrados en el preprocesamiento de textos y el análisis de lenguaje natural.
+- Proporcionar ejemplos claros y comprensibles.
