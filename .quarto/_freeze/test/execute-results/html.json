@@ -1,0 +1,11 @@
+{
+  "hash": "28deb650cb0c2ffa2ecb2386488e0257",
+  "result": {
+    "markdown": "---\ntitle: \"Pipeline para el Procesamiento del Lenguaje Natural (NPL) a través de la librería spaCy\"\nauthor: \"Mario Camacho\"\ndate: \"08-25-2024\"\ndate-modified: last-modified\ndate-format: \"DD MMMM YYYY\"\nlang: es\n\nexecute:\n    enabled: true\n---\n\n## POS Tagging\n\nMerece la pena prestar especial atención al atributo *pos_*, que nos permitirá encontrar palabras según su categoría gramatical.\n\n\n<span style=\"text-decoration:underline\">**Ejemplo.**</span>\n\n::: {.cell execution_count=1}\n``` {.python .cell-code}\nprint(\"Token:\")\n```\n\n::: {.cell-output .cell-output-stdout}\n```\nToken:\n```\n:::\n:::\n\n\n",
+    "supporting": [
+      "test_files"
+    ],
+    "filters": [],
+    "includes": {}
+  }
+}

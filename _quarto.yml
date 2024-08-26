@@ -1,19 +1,23 @@
 project:
   type: website
   output-dir: docs
+  render:
+    - "index.ipynb"
+    - "about.md"
+
+
 
 website:
   title: "Pipeline NPL"
-  favicon: attachments/favicon.png
+  favicon: docs/attachments/favicon.png
   sidebar:
     tools:
       - href: 'https://github.com/MarioC0093'
         icon: github
-        text: My repositories
+        text: Me
       - href: 'https://www.linkedin.com/in/mario-camacho-b98462ab/'
         icon: linkedin
         text: "LinkedIn"
-  twitter-card: true
   navbar:
     left:
       - href: 'https://github.com/MarioC0093/NPL-Python/'
@@ -34,22 +38,24 @@ website:
 
 abstract: |
   La aplicación de nuevas fuentes de Inteligencia Artificial en el lenguaje humano está en auge desde la aparición de las IA Generativas de texto.
-  Es por ello que se necesita tener un pipeline con los primeros pasos de NPL que debemos mantener en la resolución de problemas de mayor complejida.
+  Es por ello que se necesita tener un pipeline con los primeros pasos de NPL que debemos mantener en la resolución de problemas de mayor complejidad.
 
-keywords: ["npl","quijote"]
+keywords: ["NLP", "Inteligencia Artificial", "Pipeline", "Quarto", "Quijote"]
 
 format:
   html:
-    code-link: TRUE
+    bibliography: references.bib
+    csl: nature.csl
+    nocite: |
+      @*
+    code-link: true
     css: styles.css
     toc: true
     toc-title: "Índice"
     toc-location: left
-    toc-expand: TRUE
+    toc-expand: true
     toc-depth: 8
-    number-sections: TRUE
-    theme: style.css
-    page-layout: full
+    number-sections: true
 
 editor: visual
 page-layout: full

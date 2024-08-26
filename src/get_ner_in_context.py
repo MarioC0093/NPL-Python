@@ -21,7 +21,7 @@ def get_ner_in_context(keyword, document, desired_ner_labels= False):
                 sentence_text = re.sub('\n', ' ', sentence.text)
                 sentence_text = re.sub(f"{named_entity.text}", f"**{named_entity.text}**", sentence_text, flags=re.IGNORECASE)
 
-                display(Markdown(f'**Búsqueda {i}.**')) # Si pones --- te sale una línea de izq a drcha
+                display(Markdown(f'**Resultado {i}.**')) # Si pones --- te sale una línea de izq a drcha
                 display(Markdown(f"Tipo de entidad: **{named_entity.label_}**"))
                 display(Markdown('Contexto:'))
                 display(Markdown(sentence_text))
